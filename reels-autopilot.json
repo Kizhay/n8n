@@ -27,8 +27,8 @@
         "url": "https://api.openai.com/v1/chat/completions",
         "jsonParameters": true,
         "options": {},
-        "bodyParametersJson": "{\n  \"model\": \"gpt-3.5-turbo\",\n  \"messages\": [{\"role\": \"system\",\"content\": \"You are a helpful assistant\"},{\"role\": \"user\",\"content\": \"Generate Instagram reel caption\"}]\n}",
-        "headerParametersJson": "Key: Authorization\nValue: Bearer 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\n"
+        "bodyParametersJson": "{\n  \"model\": \"gpt-3.5-turbo\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Ты — эксперт по Instagram Reels. Напиши КЛИКБЕЙТНЫЙ заголовок и описание на русском. Ответ верни в формате JSON: {\\\"title\\\": \\\"...\\\", \\\"description\\\": \\\"...\\\"}. Без смайликов и строго по-русски.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Тема ролика: {{$json.title}}\"\n    }\n  ]\n}\n",
+        "headerParametersJson": "{\n  \"Authorization\": \"Bearer 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\",\n  \"Content-Type\": \"application/json\"\n}\n"
       },
       "name": "GPT Generate",
       "type": "n8n-nodes-base.httpRequest",
@@ -159,7 +159,7 @@
     },
     {
       "parameters": {
-        "functionCode": "const data = items[0].json;\nlet title = data.title || (data.choices && data.choices[0]?.message?.content) || '';\nreturn [{json:{title}}];"
+        "functionCode": "const data = items[0].json;\nlet title = data.title || data.choices?.[0]?.message?.content || '';\nlet description = data.description || '';\nreturn [{ json: { title, description } }];\n"
       },
       "name": "Caption Source",
       "type": "n8n-nodes-base.function",
@@ -205,8 +205,17 @@
       "parameters": {
         "authentication": "airtableTokenApi",
         "operation": "append",
-        "application": "airtable",
-        "table": "history",
+        "application": {
+          "__rl": true,
+          "value": "appvifz0ot1GllmI6",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblOnteWFMxZZqK8m",
+          "mode": "id"
+        },
+        "addAllFields": false,
         "options": {}
       },
       "name": "Save Record",
@@ -230,7 +239,7 @@
         "url": "https://api.autoposting.com/reels",
         "jsonParameters": true,
         "options": {},
-        "bodyParametersJson": "{\n  \"caption\": \"{{$node[\\\"Caption Source1\\\"].json[\\\"title\\\"]}}\",\n  \"file\": \"output.mp4\"\n}"
+        "bodyParametersJson": "{\n  \"parameters\": {\n    \"requestMethod\": \"POST\",\n    \"url\": \"https://api.autoposting.com/reels\",\n    \"jsonParameters\": true,\n    \"options\": {},\n    \"bodyParametersJson\": \"{\\n  \\\"caption\\\": \\\"{{$node[\\\\\\\"Caption Source\\\\\\\"].json[\\\\\\\"description\\\\\\\"]}}\\\",\\n  \\\"file\\\": \\\"output.mp4\\\"\\n}\"\n  },\n  \"name\": \"Publish Reel\",\n  \"type\": \"n8n-nodes-base.httpRequest\",\n  \"typeVersion\": 1,\n  \"position\": [\n    1160,\n    4960\n  ],\n  \"id\": \"d401973c-9a34-4460-846b-09d377ea1444\"\n}\n"
       },
       "name": "Publish Reel",
       "type": "n8n-nodes-base.httpRequest",
@@ -527,7 +536,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "acdab1fc-de5c-441e-820b-b7dc1e368e25",
+  "versionId": "afa4aa60-0b0e-490b-9bd6-a9baf5168db1",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
