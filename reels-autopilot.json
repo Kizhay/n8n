@@ -68,7 +68,7 @@
     },
     {
       "parameters": {
-        "command": "=/usr/bin/ffmpeg -i \"{{$node['Write Binary File'].json['path']}}\" -vf \"drawbox=...,drawtext=text='{{$node['Caption Source1'].json['title']}}' ...\""
+        "command": "=ffmpeg -i \"{{$node['Write Binary File'].json['path']}}\" -vf \"drawbox=...,drawtext=text='{{$node['Caption Source1'].json['title']}}' ...\""
       },
       "name": "Add Frame1",
       "type": "n8n-nodes-base.executeCommand",
