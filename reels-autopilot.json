@@ -302,6 +302,21 @@
           "name": "Google Drive account"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "# 1. n8n.io\n# 2. airtable.com\n# 3. developers.facebook.com\n# 4. platform.openai.com\n# 5. console.cloud.google.com\n.\n# ID -\n# Secret - \n# Access Token - EAAKp3yN0oqIBOxz80OfxZAoGMvztjTznRRQDfeoB51AEZCmQobWXF3ZClrnD5AydWs9dNmNjdKTx1h4Op127eAC14x5Nua6ERAawWr346D0RWjuDHO2UMdbC5Pff52sRxi9PWtMju1jQ4S4QvQqHzr3YLkICbZAZCvZAKERvuJsvW4XEGGkMJpAGsBsW0XMTgwC7gM5o3mDOwxRwZBy6uY9VLH3pR1wjCKZAuKkmez4ZC4CQx227SRwZDZD",
+        "height": 960,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2160,
+        1200
+      ],
+      "typeVersion": 1,
+      "id": "da773820-cd48-490d-a434-544caaa4db38",
+      "name": "Sticky Note3"
     }
   ],
   "pinData": {},
@@ -482,7 +497,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "c8e6d39c-4446-490d-98e6-3a64f6944187",
+  "versionId": "0853e9b4-8317-4776-9211-dbb8a0d9c43b",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
