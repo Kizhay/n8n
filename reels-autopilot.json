@@ -13,8 +13,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        1700,
-        2200
+        1720,
+        2040
       ],
       "id": "f0325169-a46e-4bca-9b5f-b6fe95b6da45"
     },
@@ -27,7 +27,7 @@
       "typeVersion": 1,
       "position": [
         520,
-        2380
+        2320
       ],
       "id": "ce450da9-d467-43bd-97c8-7b0eef547910"
     },
@@ -40,7 +40,7 @@
       "typeVersion": 1,
       "position": [
         900,
-        2380
+        2320
       ],
       "id": "5a2917dd-c3b4-4310-83db-4f37e77a28e2"
     },
@@ -65,7 +65,7 @@
       "typeVersion": 1,
       "position": [
         1100,
-        2380
+        2320
       ],
       "id": "22aef32d-6b4c-4023-975e-85f5a9ac9259",
       "credentials": {
@@ -84,7 +84,7 @@
       "typeVersion": 1,
       "position": [
         1300,
-        2380
+        2320
       ],
       "id": "2b57ae00-e5c0-45fb-a69c-8d56326a9b42"
     },
@@ -104,7 +104,7 @@
       "typeVersion": 1,
       "position": [
         1500,
-        2380
+        2320
       ],
       "id": "6ee451d7-ee98-497d-ad12-d165b46efc9a"
     },
@@ -117,8 +117,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        1700,
-        2400
+        1640,
+        2560
       ],
       "id": "ac6495bf-1564-4e25-81dd-7200a9c7aed9"
     },
@@ -130,8 +130,8 @@
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        1900,
-        2400
+        1800,
+        2560
       ],
       "id": "72e67980-f8fc-4640-94e4-676e7841c111"
     },
@@ -143,8 +143,8 @@
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        2100,
-        2300
+        1940,
+        2320
       ],
       "id": "ad265c75-8535-459f-a6af-208372eecb15"
     },
@@ -160,8 +160,8 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        2300,
-        2300
+        2180,
+        2320
       ],
       "id": "761bd97e-6e7b-46bc-9350-babb02b97291",
       "credentials": {
@@ -183,8 +183,8 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        2500,
-        2300
+        2400,
+        2320
       ],
       "id": "87d9ad0b-341f-462a-a57a-26799bbb2b74",
       "credentials": {
@@ -206,8 +206,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        2700,
-        2300
+        2600,
+        2320
       ],
       "id": "a87d2517-dfcd-4e9b-b046-f52c48e4d069"
     },
@@ -223,8 +223,8 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        2900,
-        2300
+        2800,
+        2320
       ],
       "id": "8a5e4b7e-67a1-4284-840d-55ff673ebce0",
       "credentials": {
@@ -251,7 +251,7 @@
       "typeVersion": 1,
       "position": [
         140,
-        2380
+        2320
       ],
       "id": "d5f117da-827a-4012-9147-8fca396ba524"
     },
@@ -268,7 +268,7 @@
       "typeVersion": 1,
       "position": [
         340,
-        2380
+        2320
       ],
       "id": "a7530de7-5aff-4fdd-861f-bb2e2f9cdc6e",
       "credentials": {
@@ -292,7 +292,7 @@
       "typeVersion": 3,
       "position": [
         700,
-        2380
+        2320
       ],
       "id": "69cdaa61-7665-41df-ba22-08b1e3393276",
       "name": "Download from Drive",
@@ -308,7 +308,13 @@
   "connections": {
     "GPT Generate1": {
       "main": [
-        []
+        [
+          {
+            "node": "Caption Source1",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Pick Random1": {
@@ -375,12 +381,24 @@
     },
     "Fetch Competitor Reels1": {
       "main": [
-        []
+        [
+          {
+            "node": "Select Viral1",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Select Viral1": {
       "main": [
-        []
+        [
+          {
+            "node": "Caption Source1",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Caption Source1": {
@@ -459,7 +477,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "896457d4-f698-4838-bffd-151f7e9468ac",
+  "versionId": "981a5c5e-a07e-47e2-8acc-d5985e9e587d",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
