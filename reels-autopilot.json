@@ -15,14 +15,14 @@
         },
         "options": {}
       },
-      "name": "Get Reels1",
+      "name": "Get Reels",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 1,
       "position": [
-        -460,
-        1340
+        740,
+        1860
       ],
-      "id": "c8a5ecb1-5a0f-488a-8b37-6baecd84c8fe",
+      "id": "b86b4f34-f248-4589-824c-dfdefd08cc82",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -32,29 +32,29 @@
     },
     {
       "parameters": {
-        "functionCode": "const files = items[0].json.files;\nconst idx = Math.floor(Math.random()*files.length);\nreturn [{json:{fileId: files[idx].id, fileName: files[idx].name, download: files[idx].webContentLink}}];"
+        "functionCode": "const files = items[0].json.files || [];\nif (!files.length) { throw new Error('Нет файлов для выбора'); }\nconst idx = Math.floor(Math.random()*files.length);\nreturn [{json:{fileId: files[idx].id, fileName: files[idx].name, download: files[idx].webContentLink}}];"
       },
-      "name": "Pick Random1",
+      "name": "Pick Random",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        -260,
-        1340
+        940,
+        1860
       ],
-      "id": "8fc8ba8b-0201-4412-9258-93b4181b9a09"
+      "id": "6f10e5af-51ec-46a8-9100-b6485efeed47"
     },
     {
       "parameters": {
-        "command": "ffmpeg -i input.mp4 \\\n    -vf \"drawbox=x=0:y=0:w=iw:h=ih:color=red@0.5:t=fill, \\\n         drawtext=text='{{timestamp}}':fontcolor=white:x=(w-text_w)/2:y=10\" \\\n    -y output.mp4"
+        "command": "ffmpeg -i {{$node['Pick Random1'].json['download']}} -vf \"drawbox=x=0:y=0:w=iw:h=ih:color=red@0.5:t=fill,drawtext=text='{{$node['Caption Source1'].json['title']}}':fontcolor=white:x=(w-text_w)/2:y=10\" -y output.mp4"
       },
-      "name": "Add Frame1",
+      "name": "Add Frame",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        -60,
-        1340
+        1140,
+        1860
       ],
-      "id": "d2073130-eade-4db7-b93c-576842c67799"
+      "id": "a2aec5d4-0a4a-43db-8ccb-454c15fa8a5d"
     },
     {
       "parameters": {
@@ -63,7 +63,7 @@
         "application": {
           "__rl": true,
           "mode": "id",
-          "value": ""
+          "value": "{{$env.AIRTABLE_BASE_ID}}"
         },
         "table": {
           "__rl": true,
@@ -72,14 +72,14 @@
         },
         "additionalOptions": {}
       },
-      "name": "Get Accounts1",
+      "name": "Get Accounts",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        140,
-        1340
+        1340,
+        1860
       ],
-      "id": "aeb9f2ad-bdd8-47eb-9ff9-8a07674acbc0",
+      "id": "11393471-2669-4af5-b31a-be26074eab84",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -91,14 +91,14 @@
       "parameters": {
         "functionCode": "return Math.random() < 0.5 ? [{json:{branch: 'GPT'}}] : [{json:{branch: 'Competitor'}}];"
       },
-      "name": "Choose Source1",
+      "name": "Choose Source",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        340,
-        1340
+        1540,
+        1860
       ],
-      "id": "a5b805da-910b-4bad-8a2d-a440d16a75a9"
+      "id": "483c7b5a-b33f-4eb2-b3a7-2bf576e86ff2"
     },
     {
       "parameters": {
@@ -111,70 +111,71 @@
           ]
         }
       },
-      "name": "IF GPT1",
+      "name": "IF GPT",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        540,
-        1260
+        1740,
+        1780
       ],
-      "id": "3e87c003-a40e-408e-8d60-7cbd92206d37"
+      "id": "9afd2118-0156-412d-9092-329027924a86"
     },
     {
       "parameters": {
         "requestMethod": "POST",
         "url": "https://api.openai.com/v1/chat/completions",
         "jsonParameters": true,
-        "options": {}
+        "options": {},
+        "bodyParametersJson": "{\n  \"model\": \"gpt-3.5-turbo\",\n  \"messages\": [{\"role\": \"user\", \"content\": \"Generate Instagram reel caption\"}]\n}"
       },
-      "name": "GPT Generate1",
+      "name": "GPT Generate",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        740,
-        1160
+        1940,
+        1680
       ],
-      "id": "cea1d953-6f11-4403-9a99-475b931484ea"
+      "id": "7838891d-9621-4775-8fd2-361ae221c7bb"
     },
     {
       "parameters": {
         "url": "=https://www.instagram.com/{{$json.account}}/reels/",
         "options": {}
       },
-      "name": "Fetch Competitor Reels1",
+      "name": "Fetch Competitor Reels",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        740,
-        1360
+        1940,
+        1880
       ],
-      "id": "13213b4e-1082-4184-a5a5-b0a2527a02fa"
+      "id": "92a02202-e7c5-4343-875d-c30b15e4c2f6"
     },
     {
       "parameters": {
-        "functionCode": "// filter for viral reel\nconst reels = items[0].json.reels || [];\nconst good = reels.filter(r => r.views / r.followers > 1.5);\nconst pick = good[Math.floor(Math.random()*good.length)];\nreturn [{json:{title: pick.title, description: pick.description, music: pick.music}}];"
+        "functionCode": "// filter for viral reel\nconst reels = items[0].json.reels || [];\nconst good = reels.filter(r => r.views / r.followers > 1.5);\nif (!good.length) { return [{json:{title:'', description:'', music:''}}]; }\nconst pick = good[Math.floor(Math.random()*good.length)];\nreturn [{json:{title: pick.title, description: pick.description, music: pick.music}}];"
       },
-      "name": "Select Viral1",
+      "name": "Select Viral",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        940,
-        1360
+        2140,
+        1880
       ],
-      "id": "73045656-49a8-4f43-8445-abcfcaa3a267"
+      "id": "182a9a44-24bd-4232-9739-25c08db61c73"
     },
     {
       "parameters": {
-        "functionCode": "return items;"
+        "functionCode": "const data = items[0].json;\nlet title = data.title || (data.choices && data.choices[0]?.message?.content) || '';\nreturn [{json:{title}}];"
       },
-      "name": "Caption Source1",
+      "name": "Caption Source",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        1140,
-        1260
+        2340,
+        1780
       ],
-      "id": "83406dfa-0bec-47e6-bb51-8e79c5064bac"
+      "id": "c2fb40f2-3c87-4a69-b2e9-1e4d1d81b2ee"
     },
     {
       "parameters": {
@@ -184,14 +185,14 @@
         "table": "history",
         "additionalOptions": {}
       },
-      "name": "Check Duplicate1",
+      "name": "Check Duplicate",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        1340,
-        1260
+        2540,
+        1780
       ],
-      "id": "50b796b7-194f-4ca6-aaae-dee4d722b8fb",
+      "id": "69e496dc-998c-422d-9510-b4101f60e72c",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -207,14 +208,14 @@
         "table": "history",
         "options": {}
       },
-      "name": "Save Record1",
+      "name": "Save Record",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        1540,
-        1260
+        2740,
+        1780
       ],
-      "id": "b9c6326e-1af3-42ae-b191-11cc7da7579c",
+      "id": "86275e4c-53bd-4ac0-b44c-8af1c5cc9add",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -227,16 +228,17 @@
         "requestMethod": "POST",
         "url": "https://api.autoposting.com/reels",
         "jsonParameters": true,
-        "options": {}
+        "options": {},
+        "bodyParametersJson": "{\n  \"caption\": \"{{$node[\\\"Caption Source1\\\"].json[\\\"title\\\"]}}\",\n  \"file\": \"output.mp4\"\n}"
       },
-      "name": "Publish Reel1",
+      "name": "Publish Reel",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        1740,
-        1260
+        2940,
+        1780
       ],
-      "id": "e7dcc5a6-1cb1-4ae6-acf6-bcc4126aef55"
+      "id": "a88be60a-c467-4d07-80fc-db6075b8d5d7"
     },
     {
       "parameters": {
@@ -246,14 +248,14 @@
         "table": "history",
         "options": {}
       },
-      "name": "Update Status1",
+      "name": "Update Status",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        1940,
-        1260
+        3140,
+        1780
       ],
-      "id": "b371d95e-ad60-4ae5-876c-b94b7744e1b2",
+      "id": "5eb64f22-90cf-4c6f-b427-ce2753e2df67",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -264,150 +266,150 @@
   ],
   "pinData": {},
   "connections": {
-    "Get Reels1": {
+    "Get Reels": {
       "main": [
         [
           {
-            "node": "Pick Random1",
+            "node": "Pick Random",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Pick Random1": {
+    "Pick Random": {
       "main": [
         [
           {
-            "node": "Add Frame1",
+            "node": "Add Frame",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Add Frame1": {
+    "Add Frame": {
       "main": [
         [
           {
-            "node": "Get Accounts1",
+            "node": "Get Accounts",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Get Accounts1": {
+    "Get Accounts": {
       "main": [
         [
           {
-            "node": "Choose Source1",
+            "node": "Choose Source",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Choose Source1": {
+    "Choose Source": {
       "main": [
         [
           {
-            "node": "IF GPT1",
+            "node": "IF GPT",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "IF GPT1": {
+    "IF GPT": {
       "main": [
         [
           {
-            "node": "GPT Generate1",
+            "node": "GPT Generate",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Fetch Competitor Reels1",
+            "node": "Fetch Competitor Reels",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "GPT Generate1": {
+    "GPT Generate": {
       "main": [
         [
           {
-            "node": "Caption Source1",
+            "node": "Caption Source",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Fetch Competitor Reels1": {
+    "Fetch Competitor Reels": {
       "main": [
         [
           {
-            "node": "Select Viral1",
+            "node": "Select Viral",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Select Viral1": {
+    "Select Viral": {
       "main": [
         [
           {
-            "node": "Caption Source1",
+            "node": "Caption Source",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Caption Source1": {
+    "Caption Source": {
       "main": [
         [
           {
-            "node": "Check Duplicate1",
+            "node": "Check Duplicate",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Check Duplicate1": {
+    "Check Duplicate": {
       "main": [
         [
           {
-            "node": "Save Record1",
+            "node": "Save Record",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Save Record1": {
+    "Save Record": {
       "main": [
         [
           {
-            "node": "Publish Reel1",
+            "node": "Publish Reel",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Publish Reel1": {
+    "Publish Reel": {
       "main": [
         [
           {
-            "node": "Update Status1",
+            "node": "Update Status",
             "type": "main",
             "index": 0
           }
@@ -419,7 +421,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "c81eca6c-062b-40b5-a080-2559957e5f51",
+  "versionId": "20468e39-3392-4f13-9068-9c37143cc7f0",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
