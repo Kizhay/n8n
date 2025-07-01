@@ -1,16 +1,16 @@
-## 🚀 Deploying the Workflow on Server (Production)
+## 🚀 Развёртывание Workflow на сервере (Production)
 
-To run the `reels-autopilot.json` workflow on your server (e.g. `kizhay.ru`), follow these steps:
+Чтобы запустить workflow `reels-autopilot.json` на своём сервере (например, `kizhay.ru`), следуйте этим шагам:
 
-### 1. **Install Docker and Docker Compose**  
-Make sure your server has Docker and Docker Compose installed.  
-For Ubuntu/Debian:
+### 1. **Установите Docker и Docker Compose**  
+Убедитесь, что на сервере установлены Docker и Docker Compose.  
+Для Ubuntu/Debian:
 ```sh
 apt update && apt install -y docker.io docker-compose
 ```
 
-### 2. **Ensure `ffmpeg` is available inside the container**  
-The Dockerfile includes ffmpeg. Example:
+### 2. **Убедитесь, что `ffmpeg` доступен внутри контейнера**  
+В Dockerfile добавлена установка `ffmpeg`. Пример:
 ```Dockerfile
 FROM n8nio/n8n:latest
 
@@ -19,30 +19,36 @@ RUN apk add --no-cache ffmpeg
 USER node
 ```
 
-This ensures ffmpeg is installed in the container.
+Это гарантирует, что `ffmpeg` установлен в контейнере.
 
-### 3. **Build and run n8n with Docker Compose**  
-Inside your project directory:
+### 3. **Соберите и запустите n8n с помощью Docker Compose**  
+В каталоге вашего проекта выполните:
 ```sh
 docker-compose up --build -d
 ```
 
-> The provided `docker-compose.yml` will launch the n8n instance with ffmpeg support.
+> Приложенный `docker-compose.yml` запустит n8n с поддержкой ffmpeg.
 
-### 4. **Access the n8n UI**  
-Open your browser and navigate to:  
-👉 [https://kizhay.ru]
+### 4. **Откройте интерфейс n8n**  
+В браузере перейдите по адресу:  
+👉 [https://kizhay.ru](https://kizhay.ru)
 
-### 5. **Import the Workflow**  
-In the n8n UI:
-- Click **“Create Workflow”**
-- Choose **“Import from File”**
-- Select `reels-autopilot.json`
+### 5. **Импортируйте Workflow**  
+В интерфейсе n8n:
+- Нажмите **«Create Workflow»**
+- Выберите **«Import from File»**
+- Укажите файл `reels-autopilot.json`
 
-### 6. **Set up Credentials and Environment Variables**  
-Make sure all nodes (e.g., Google Drive, Telegram) have the proper credentials configured.  
-Adjust any variables like file paths, tokens, or webhook URLs if needed.
+### 6. **Настройте учётные данные и переменные окружения**  
+Убедитесь, что все узлы (например, Google Drive, Telegram) настроены с корректными учетными данными.  
+При необходимости скорректируйте переменные, такие как пути к файлам, токены или вебхуки.
 
 ---
 
-✅ Once done, your server-hosted n8n instance will be ready to run the `reels-autopilot` workflow with all dependencies.
+### ⚠️ ВАЖНО: настройка Fetch Competitor Reels1  
+Для узла **Fetch Competitor Reels1** установите параметр **Response Format** в значение `String` в интерфейсе n8n.  
+Страницы Instagram возвращают HTML, поэтому если оставить значение по умолчанию (`JSON`), возникнет ошибка.
+
+---
+
+✅ После выполнения этих шагов ваш сервер с n8n будет готов к запуску workflow `reels-autopilot` со всеми зависимостями.
