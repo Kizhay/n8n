@@ -317,7 +317,7 @@
         "operation": "download",
         "fileId": {
           "__rl": true,
-          "value": "={{$node[\"Pick Random\"].json[\"fileId\"]}}\n",
+          "value": "={{$node[\"Pick Random\"].json[\"fileId\"]}}",
           "mode": "id"
         },
         "options": {}
