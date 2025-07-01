@@ -3,7 +3,7 @@
   "nodes": [
     {
       "parameters": {
-        "functionCode": "const files = items[0].json.files || [];\nif (!files.length) { throw new Error('Нет файлов для выбора'); }\nconst idx = Math.floor(Math.random()*files.length);\nreturn [{json:{fileId: files[idx].id, fileName: files[idx].name, download: files[idx].webContentLink}}];"
+        "functionCode": "const files = items; // каждый item — это файл\nif (!files.length) {\n  throw new Error('Нет файлов для выбора');\n}\n\nconst idx = Math.floor(Math.random() * files.length);\n\nreturn [\n  {\n    json: {\n      fileId: files[idx].json.id,\n      fileName: files[idx].json.name\n    }\n  }\n];\n"
       },
       "name": "Pick Random",
       "type": "n8n-nodes-base.function",
@@ -447,7 +447,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "c343a874-141f-4003-9c2d-7ce92110d64b",
+  "versionId": "9f7eb0ad-03e4-44bc-9b6f-b7f39eddbc85",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
