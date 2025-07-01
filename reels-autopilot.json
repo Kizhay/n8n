@@ -33,14 +33,14 @@
     },
     {
       "parameters": {
-        "command": "=ffmpeg -i \"{{$node['Download from Drive'].binary.data.filePath}}\" -vf \"drawbox=x=0:y=0:w=iw:h=ih:color=red@0.5:t=fill,drawtext=text='{{$node['Caption Source1'].json['title']}}':fontcolor=white:x=(w-text_w)/2:y=10\" -y output.mp4\n"
+        "command": "=ffmpeg -i \"{{$node['Download from Drive'].binary.data.filePath}}\"\n     -vf \"drawbox=... ,drawtext=text='{{$node['Caption Source1'].json['title']}}' ...\"\n"
       },
       "name": "Add Frame1",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        900,
-        2320
+        920,
+        2540
       ],
       "id": "5a2917dd-c3b4-4310-83db-4f37e77a28e2"
     },
@@ -408,6 +408,11 @@
             "node": "Check Duplicate1",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Add Frame1",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -463,13 +468,7 @@
     },
     "Download from Drive": {
       "main": [
-        [
-          {
-            "node": "Add Frame1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     }
   },
@@ -477,7 +476,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "981a5c5e-a07e-47e2-8acc-d5985e9e587d",
+  "versionId": "d92776b1-dea2-4bd7-8235-cd19f290a66f",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
