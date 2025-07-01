@@ -1,1 +1,459 @@
-описание или содержимое
+{
+  "name": "My workflow 6",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "7001e967-04d9-4e82-b6e2-4d00bf35ef3f",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        -900,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "list",
+        "options": {}
+      },
+      "name": "Get Reels",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 1,
+      "position": [
+        -700,
+        480
+      ],
+      "id": "41f80620-5612-4dc3-a5e8-08f3241256e4",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Vt1qBhoNFddDaUnc",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "const files = items[0].json.files;\nconst idx = Math.floor(Math.random()*files.length);\nreturn [{json:{fileId: files[idx].id, fileName: files[idx].name, download: files[idx].webContentLink}}];"
+      },
+      "name": "Pick Random",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        -500,
+        480
+      ],
+      "id": "2adb255f-2b2f-4cc0-852e-ebf65a6fdd82"
+    },
+    {
+      "parameters": {
+        "command": "ffmpeg -i {{$node['Pick Random'].json['download']}} -vf drawbox=color=black@1:width=iw:height=100:t=max -vf drawtext=text='{{$node[\"Caption Source\"].json[\"title\"]}}':fontcolor=white:x=(w-text_w)/2:y=10 -y output.mp4"
+      },
+      "name": "Add Frame",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        -300,
+        480
+      ],
+      "id": "dcd10354-611e-4455-9fcc-cf384c85e9a4"
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "operation": "list",
+        "application": {
+          "__rl": true,
+          "mode": "id",
+          "value": ""
+        },
+        "table": {
+          "__rl": true,
+          "value": "accounts",
+          "mode": ""
+        },
+        "additionalOptions": {}
+      },
+      "name": "Get Accounts",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [
+        -100,
+        480
+      ],
+      "id": "0fc6ebb1-c909-49d5-bf41-c6ec69376f4c",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "j0A9W6lTtOFzjTdr",
+          "name": "Reels Завод"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "return Math.random() < 0.5 ? [{json:{branch: 'GPT'}}] : [{json:{branch: 'Competitor'}}];"
+      },
+      "name": "Choose Source",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        100,
+        480
+      ],
+      "id": "ea2ec17a-7301-4671-97f8-e91e4d01042f"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json[\"branch\"]}}",
+              "value2": "GPT"
+            }
+          ]
+        }
+      },
+      "name": "IF GPT",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        300,
+        400
+      ],
+      "id": "bbfd982c-77c6-4907-a6e4-c782df11faf2"
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "jsonParameters": true,
+        "options": {}
+      },
+      "name": "GPT Generate",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        500,
+        300
+      ],
+      "id": "4363bec0-ba37-447f-ad7a-042f1c97a63a"
+    },
+    {
+      "parameters": {
+        "url": "=https://www.instagram.com/{{$json.account}}/reels/",
+        "options": {}
+      },
+      "name": "Fetch Competitor Reels",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        500,
+        500
+      ],
+      "id": "a7aae8dd-8302-4d5e-8872-5172be97ae62"
+    },
+    {
+      "parameters": {
+        "functionCode": "// filter for viral reel\nconst reels = items[0].json.reels || [];\nconst good = reels.filter(r => r.views / r.followers > 1.5);\nconst pick = good[Math.floor(Math.random()*good.length)];\nreturn [{json:{title: pick.title, description: pick.description, music: pick.music}}];"
+      },
+      "name": "Select Viral",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        700,
+        500
+      ],
+      "id": "22337b92-0056-4855-b1fc-6dab9d1e3138"
+    },
+    {
+      "parameters": {
+        "functionCode": "return items;"
+      },
+      "name": "Caption Source",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        900,
+        400
+      ],
+      "id": "4d03f35e-5079-4016-82fa-d3542151cd5a"
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "operation": "list",
+        "application": "airtable",
+        "table": "history",
+        "additionalOptions": {}
+      },
+      "name": "Check Duplicate",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        400
+      ],
+      "id": "9a2ef13d-7bbc-4693-9788-c4f440793644",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "j0A9W6lTtOFzjTdr",
+          "name": "Reels Завод"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "operation": "append",
+        "application": "airtable",
+        "table": "history",
+        "options": {}
+      },
+      "name": "Save Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        400
+      ],
+      "id": "6cf0f053-3dd7-4fa8-8bfa-8914adb384ab",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "j0A9W6lTtOFzjTdr",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "https://api.autoposting.com/reels",
+        "jsonParameters": true,
+        "options": {}
+      },
+      "name": "Publish Reel",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        400
+      ],
+      "id": "223437b4-d8d5-4b2c-87e4-7d58cfb028af"
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "operation": "update",
+        "application": "airtable",
+        "table": "history",
+        "options": {}
+      },
+      "name": "Update Status",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        400
+      ],
+      "id": "9239eaa9-4153-46b3-9adf-446fc0498a68",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "j0A9W6lTtOFzjTdr",
+          "name": "Reels Завод"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        980,
+        660
+      ],
+      "id": "7b76e3a3-a152-4e3b-a0aa-6933bc845a5e",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Get Reels",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Reels": {
+      "main": [
+        [
+          {
+            "node": "Pick Random",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pick Random": {
+      "main": [
+        [
+          {
+            "node": "Add Frame",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Frame": {
+      "main": [
+        [
+          {
+            "node": "Get Accounts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Accounts": {
+      "main": [
+        [
+          {
+            "node": "Choose Source",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Choose Source": {
+      "main": [
+        [
+          {
+            "node": "IF GPT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF GPT": {
+      "main": [
+        [
+          {
+            "node": "GPT Generate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fetch Competitor Reels",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GPT Generate": {
+      "main": [
+        [
+          {
+            "node": "Caption Source",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Competitor Reels": {
+      "main": [
+        [
+          {
+            "node": "Select Viral",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select Viral": {
+      "main": [
+        [
+          {
+            "node": "Caption Source",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Caption Source": {
+      "main": [
+        [
+          {
+            "node": "Check Duplicate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Duplicate": {
+      "main": [
+        [
+          {
+            "node": "Save Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Record": {
+      "main": [
+        [
+          {
+            "node": "Publish Reel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Publish Reel": {
+      "main": [
+        [
+          {
+            "node": "Update Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7ffef068-0907-4bed-8121-98f8b482ff62",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
+  },
+  "id": "z0jH8wDyhCZwTN2f",
+  "tags": []
+}
