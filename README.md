@@ -55,7 +55,7 @@ docker compose up --build
 2. **Add Frame** — команда ffmpeg (обязательно одной строкой):
 
    ```bash
-   ffmpeg -i "/tmp/input.mp4" -vf "drawbox=...,drawtext=text='{{$node[\"Caption Source1\"].json[\"title\"]}}'" -y "/tmp/output.mp4"
+   ffmpeg -i "/tmp/input.mp4" -vf "drawbox=...,drawtext=text='{{$node[\"Caption Source\"].json[\"title\"]}}'" -y "/tmp/output.mp4"
    ```
 
 3. **Generate Caption → Generate Title**
