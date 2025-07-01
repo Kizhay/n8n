@@ -111,6 +111,7 @@
     {
       "parameters": {
         "url": "=https://www.instagram.com/{{$json.account}}/reels/",
+        "responseFormat": "string",
         "options": {}
       },
       "name": "Fetch Competitor Reels1",
@@ -497,7 +498,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "0853e9b4-8317-4776-9211-dbb8a0d9c43b",
+  "versionId": "4bd6fac1-ff90-47c8-8d34-d49596f5a4bd",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
