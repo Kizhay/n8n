@@ -26,14 +26,14 @@
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        700,
+        520,
         2380
       ],
       "id": "ce450da9-d467-43bd-97c8-7b0eef547910"
     },
     {
       "parameters": {
-        "command": "ffmpeg -i {{$node['Pick Random1'].json['download']}} -vf \"drawbox=x=0:y=0:w=iw:h=ih:color=red@0.5:t=fill,drawtext=text='{{$node['Caption Source1'].json['title']}}':fontcolor=white:x=(w-text_w)/2:y=10\" -y output.mp4"
+        "command": "ffmpeg -i \"{{$node['Download from Drive'].binary.data.filePath}}\" -vf \"drawbox=x=0:y=0:w=iw:h=ih:color=red@0.5:t=fill,drawtext=text='{{$node['Caption Source1'].json['title']}}':fontcolor=white:x=(w-text_w)/2:y=10\" -y output.mp4\n"
       },
       "name": "Add Frame1",
       "type": "n8n-nodes-base.executeCommand",
@@ -104,7 +104,7 @@
       "typeVersion": 1,
       "position": [
         1500,
-        2300
+        2380
       ],
       "id": "6ee451d7-ee98-497d-ad12-d165b46efc9a"
     },
@@ -250,7 +250,7 @@
       "type": "n8n-nodes-base.cron",
       "typeVersion": 1,
       "position": [
-        320,
+        140,
         2380
       ],
       "id": "d5f117da-827a-4012-9147-8fca396ba524"
@@ -267,10 +267,35 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 1,
       "position": [
-        520,
+        340,
         2380
       ],
       "id": "a7530de7-5aff-4fdd-861f-bb2e2f9cdc6e",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Vt1qBhoNFddDaUnc",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{$node[\"Pick Random1\"].json[\"fileId\"]}}\n",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        700,
+        2380
+      ],
+      "id": "69cdaa61-7665-41df-ba22-08b1e3393276",
+      "name": "Download file",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -283,20 +308,14 @@
   "connections": {
     "GPT Generate1": {
       "main": [
-        [
-          {
-            "node": "Caption Source1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Pick Random1": {
       "main": [
         [
           {
-            "node": "Add Frame1",
+            "node": "Download file",
             "type": "main",
             "index": 0
           }
@@ -356,68 +375,32 @@
     },
     "Fetch Competitor Reels1": {
       "main": [
-        [
-          {
-            "node": "Select Viral1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Select Viral1": {
       "main": [
-        [
-          {
-            "node": "Caption Source1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Caption Source1": {
       "main": [
-        [
-          {
-            "node": "Check Duplicate1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Check Duplicate1": {
       "main": [
-        [
-          {
-            "node": "Save Record1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Save Record1": {
       "main": [
-        [
-          {
-            "node": "Publish Reel1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Publish Reel1": {
       "main": [
-        [
-          {
-            "node": "Update Status1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Cron1": {
@@ -441,13 +424,24 @@
           }
         ]
       ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Add Frame1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "4a07f353-4fe8-4ee6-947a-0770edb1359e",
+  "versionId": "ddb57455-88ba-4eb4-83e6-1cf28ad28d87",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
