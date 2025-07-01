@@ -1,29 +1,48 @@
-## Running the workflow locally
+## 🚀 Deploying the Workflow on Server (Production)
 
-To run the `reels-autopilot.json` workflow locally:
+To run the `reels-autopilot.json` workflow on your server (e.g. `kizhay.ru`), follow these steps:
 
-1. **Install Docker and Docker Compose**  
-   Make sure you have Docker and Docker Compose installed on your system.
+### 1. **Install Docker and Docker Compose**  
+Make sure your server has Docker and Docker Compose installed.  
+For Ubuntu/Debian:
+```sh
+apt update && apt install -y docker.io docker-compose
+```
 
-2. **Install `ffmpeg`** inside the container  
-   If you're using an Alpine-based Docker image (like the default `n8nio/n8n`), install `ffmpeg` with:
-   ```sh
-   apk add --no-cache ffmpeg
-   ```
+### 2. **Ensure `ffmpeg` is available inside the container**  
+The Dockerfile includes ffmpeg. Example:
+```Dockerfile
+FROM n8nio/n8n:latest
 
-3. **Start n8n using Docker Compose**  
-   In the project directory, run:
-   ```sh
-   docker-compose up --build
-   ```
+USER root
+RUN apk add --no-cache ffmpeg
+USER node
+```
 
-4. **Import the workflow**  
-   - Open n8n in your browser: [http://localhost:5678](http://localhost:5678)  
-   - Click **“Create Workflow”** → **“Import from file”**  
-   - Select the file `reels-autopilot.json`
+This ensures ffmpeg is installed in the container.
 
-5. **Configure any required credentials or variables**  
-   - Ensure all nodes (e.g., Drive, Telegram, etc.) have the correct credentials configured.  
-   - If needed, adjust paths or parameters.
+### 3. **Build and run n8n with Docker Compose**  
+Inside your project directory:
+```sh
+docker-compose up --build -d
+```
 
-This will allow you to run and test the workflow locally with all dependencies.
+> The provided `docker-compose.yml` will launch the n8n instance with ffmpeg support.
+
+### 4. **Access the n8n UI**  
+Open your browser and navigate to:  
+👉 [http://your-server-ip:5678](http://your-server-ip:5678)
+
+### 5. **Import the Workflow**  
+In the n8n UI:
+- Click **“Create Workflow”**
+- Choose **“Import from File”**
+- Select `reels-autopilot.json`
+
+### 6. **Set up Credentials and Environment Variables**  
+Make sure all nodes (e.g., Google Drive, Telegram) have the proper credentials configured.  
+Adjust any variables like file paths, tokens, or webhook URLs if needed.
+
+---
+
+✅ Once done, your server-hosted n8n instance will be ready to run the `reels-autopilot` workflow with all dependencies.
