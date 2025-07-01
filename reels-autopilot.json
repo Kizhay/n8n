@@ -3,20 +3,41 @@
   "nodes": [
     {
       "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "mode": "custom",
+              "cronExpression": "0 6 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Cron1",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        140,
+        2320
+      ],
+      "id": "d5f117da-827a-4012-9147-8fca396ba524"
+    },
+    {
+      "parameters": {
         "requestMethod": "POST",
         "url": "https://api.openai.com/v1/chat/completions",
         "jsonParameters": true,
         "options": {},
-        "bodyParametersJson": "{\n  \"model\": \"gpt-3.5-turbo\",\n  \"messages\": [{\"role\": \"system\",\"content\": \"You are a helpful assistant\"},{\"role\": \"user\",\"content\": \"Generate Instagram reel caption\"}]\n}"
+        "bodyParametersJson": "{\n  \"model\": \"gpt-3.5-turbo\",\n  \"messages\": [{\"role\": \"system\",\"content\": \"You are a helpful assistant\"},{\"role\": \"user\",\"content\": \"Generate Instagram reel caption\"}]\n}",
+        "headerParametersJson": "Key: Authorization\nValue: Bearer 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\n"
       },
       "name": "GPT Generate",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        1720,
-        2040
+        280,
+        4680
       ],
-      "id": "f0325169-a46e-4bca-9b5f-b6fe95b6da45"
+      "id": "5d4b5878-6083-42a9-8b87-e7efdbf727c4"
     },
     {
       "parameters": {
@@ -26,23 +47,23 @@
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        520,
-        2320
+        -940,
+        4960
       ],
-      "id": "ce450da9-d467-43bd-97c8-7b0eef547910"
+      "id": "57f1b804-6891-44d7-8274-48aa6ca2f97f"
     },
     {
       "parameters": {
-        "command": "=ffmpeg -i \"{{$node['Download from Drive'].binary.data.filePath}}\"\n     -vf \"drawbox=... ,drawtext=text='{{$node['Caption Source'].json['title']}}' ...\"\n"
+        "command": "=ffmpeg -i \"{{$node['Download from Drive1'].binary.data.filePath}}\"\n     -vf \"drawbox=... ,drawtext=text='{{$node['Caption Source'].json['title']}}' ...\"\n"
       },
-      "name": "CronAdd Frame",
+      "name": "Add Frame",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        940,
-        2480
+        -520,
+        5120
       ],
-      "id": "5a2917dd-c3b4-4310-83db-4f37e77a28e2"
+      "id": "691bffee-d7d0-4ebf-b2da-0907002a19ad"
     },
     {
       "parameters": {
@@ -60,14 +81,14 @@
         },
         "additionalOptions": {}
       },
-      "name": "Get Accounts1",
+      "name": "Get Accounts",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        1100,
-        2320
+        -360,
+        4960
       ],
-      "id": "22aef32d-6b4c-4023-975e-85f5a9ac9259",
+      "id": "c40f92c1-5006-446d-a198-d7d749160720",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -83,10 +104,10 @@
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        1300,
-        2320
+        -160,
+        4960
       ],
-      "id": "2b57ae00-e5c0-45fb-a69c-8d56326a9b42"
+      "id": "872fa9ee-e90f-4632-adbc-597da55c5aa7"
     },
     {
       "parameters": {
@@ -99,14 +120,14 @@
           ]
         }
       },
-      "name": "IF GPT1",
+      "name": "IF GPT",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        1500,
-        2320
+        60,
+        4960
       ],
-      "id": "6ee451d7-ee98-497d-ad12-d165b46efc9a"
+      "id": "fca7c6fc-2fc8-4c46-bd25-03ba5106b55e"
     },
     {
       "parameters": {
@@ -118,10 +139,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        1640,
-        2560
+        200,
+        5200
       ],
-      "id": "ac6495bf-1564-4e25-81dd-7200a9c7aed9"
+      "id": "36fd1db8-5f2e-452b-bb19-7f035ea77b16"
     },
     {
       "parameters": {
@@ -131,10 +152,10 @@
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        1800,
-        2560
+        360,
+        5200
       ],
-      "id": "72e67980-f8fc-4640-94e4-676e7841c111"
+      "id": "aecb86ca-0a8a-4231-b97c-8c8e37e2ffce"
     },
     {
       "parameters": {
@@ -144,27 +165,35 @@
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        1940,
-        2320
+        500,
+        4960
       ],
-      "id": "ad265c75-8535-459f-a6af-208372eecb15"
+      "id": "2ea415e4-0d69-42d9-8fc9-457bab090756"
     },
     {
       "parameters": {
         "authentication": "airtableTokenApi",
         "operation": "list",
-        "application": "airtable",
-        "table": "history",
+        "application": {
+          "__rl": true,
+          "value": "appvifz0ot1GllmI6",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblOnteWFMxZZqK8m",
+          "mode": "id"
+        },
         "additionalOptions": {}
       },
       "name": "Check Duplicate",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        2180,
-        2320
+        740,
+        4960
       ],
-      "id": "761bd97e-6e7b-46bc-9350-babb02b97291",
+      "id": "d4f82508-3354-46a6-9f20-2d90e2d14509",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -184,10 +213,10 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        2400,
-        2320
+        960,
+        4960
       ],
-      "id": "87d9ad0b-341f-462a-a57a-26799bbb2b74",
+      "id": "a387a821-7b89-41f2-afa8-837aa76a04f6",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -201,16 +230,16 @@
         "url": "https://api.autoposting.com/reels",
         "jsonParameters": true,
         "options": {},
-        "bodyParametersJson": "{\n  \"caption\": \"{{$node[\\\"Caption Source\\\"].json[\\\"title\\\"]}}\",\n  \"file\": \"output.mp4\"\n}"
+        "bodyParametersJson": "{\n  \"caption\": \"{{$node[\\\"Caption Source1\\\"].json[\\\"title\\\"]}}\",\n  \"file\": \"output.mp4\"\n}"
       },
       "name": "Publish Reel",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        2600,
-        2320
+        1160,
+        4960
       ],
-      "id": "a87d2517-dfcd-4e9b-b046-f52c48e4d069"
+      "id": "d401973c-9a34-4460-846b-09d377ea1444"
     },
     {
       "parameters": {
@@ -224,10 +253,10 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        2800,
-        2320
+        1360,
+        4960
       ],
-      "id": "8a5e4b7e-67a1-4284-840d-55ff673ebce0",
+      "id": "2d710e35-cb9a-4a84-9bd9-d280ff4dfafe",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -251,10 +280,10 @@
       "type": "n8n-nodes-base.cron",
       "typeVersion": 1,
       "position": [
-        140,
-        2320
+        -1320,
+        4960
       ],
-      "id": "d5f117da-827a-4012-9147-8fca396ba524"
+      "id": "719db613-84ce-40c5-81a2-f9a9dbbf7a40"
     },
     {
       "parameters": {
@@ -264,14 +293,14 @@
         "queryString": "'1mwCMPgw6NjfEl4IiRIb1gkdFCM42gBXi' in parents and mimeType != 'application/vnd.google-apps.folder'",
         "options": {}
       },
-      "name": "Get Reels",
+      "name": "Get Reels1",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 1,
       "position": [
-        340,
-        2320
+        -1120,
+        4960
       ],
-      "id": "a7530de7-5aff-4fdd-861f-bb2e2f9cdc6e",
+      "id": "9443a6f7-2234-40b5-824f-abab588dba69",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -292,11 +321,11 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        700,
-        2320
+        -760,
+        4960
       ],
-      "id": "69cdaa61-7665-41df-ba22-08b1e3393276",
-      "name": "Download from Drive",
+      "id": "a204ff36-1d51-46d0-8a5a-73fe41b0c97f",
+      "name": "Download from Drive1",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -312,16 +341,21 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        2160,
-        1200
+        720,
+        3840
       ],
       "typeVersion": 1,
-      "id": "da773820-cd48-490d-a434-544caaa4db38",
-      "name": "Sticky Note3"
+      "id": "c7d219d3-04c6-47ec-8da3-a2c620652e53",
+      "name": "Sticky Note"
     }
   ],
   "pinData": {},
   "connections": {
+    "Cron1": {
+      "main": [
+        []
+      ]
+    },
     "GPT Generate": {
       "main": [
         [
@@ -337,25 +371,25 @@
       "main": [
         [
           {
-            "node": "Download from Drive",
+            "node": "Download from Drive1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "CronAdd Frame": {
+    "Add Frame": {
       "main": [
         [
           {
-            "node": "Get Accounts1",
+            "node": "Get Accounts",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Get Accounts1": {
+    "Get Accounts": {
       "main": [
         [
           {
@@ -370,14 +404,14 @@
       "main": [
         [
           {
-            "node": "IF GPT1",
+            "node": "IF GPT",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "IF GPT1": {
+    "IF GPT": {
       "main": [
         [
           {
@@ -426,7 +460,7 @@
             "index": 0
           },
           {
-            "node": "CronAdd Frame",
+            "node": "Add Frame",
             "type": "main",
             "index": 0
           }
@@ -455,23 +489,18 @@
         ]
       ]
     },
-    "Publish Reel": {
-      "main": [
-        []
-      ]
-    },
     "Cron": {
       "main": [
         [
           {
-            "node": "Get Reels",
+            "node": "Get Reels1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Get Reels": {
+    "Get Reels1": {
       "main": [
         [
           {
@@ -482,11 +511,11 @@
         ]
       ]
     },
-    "Download from Drive": {
+    "Download from Drive1": {
       "main": [
         [
           {
-            "node": "Get Accounts1",
+            "node": "Get Accounts",
             "type": "main",
             "index": 0
           }
@@ -498,7 +527,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "4bd6fac1-ff90-47c8-8d34-d49596f5a4bd",
+  "versionId": "acdab1fc-de5c-441e-820b-b7dc1e368e25",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
