@@ -31,7 +31,7 @@ docker-compose up --build -d
 
 ### 4. **Access the n8n UI**  
 Open your browser and navigate to:  
-👉 [http://your-server-ip:5678](http://your-server-ip:5678)
+👉 [https://kizhay.ru]
 
 ### 5. **Import the Workflow**  
 In the n8n UI:
