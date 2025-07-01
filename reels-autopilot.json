@@ -3,35 +3,6 @@
   "nodes": [
     {
       "parameters": {
-        "authentication": "oAuth2",
-        "operation": "list",
-        "queryFilters": {
-          "name": [
-            {}
-          ],
-          "mimeType": [
-            {}
-          ]
-        },
-        "options": {}
-      },
-      "name": "Get Reels",
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 1,
-      "position": [
-        740,
-        1860
-      ],
-      "id": "b86b4f34-f248-4589-824c-dfdefd08cc82",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "Vt1qBhoNFddDaUnc",
-          "name": "Google Drive account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "functionCode": "const files = items[0].json.files || [];\nif (!files.length) { throw new Error('Нет файлов для выбора'); }\nconst idx = Math.floor(Math.random()*files.length);\nreturn [{json:{fileId: files[idx].id, fileName: files[idx].name, download: files[idx].webContentLink}}];"
       },
       "name": "Pick Random",
@@ -62,12 +33,12 @@
         "operation": "list",
         "application": {
           "__rl": true,
-          "mode": "id",
-          "value": "{{$env.AIRTABLE_BASE_ID}}"
+          "value": "appvifz0ot1GllmI6",
+          "mode": "id"
         },
         "table": {
           "__rl": true,
-          "value": "accounts",
+          "value": "=accounts",
           "mode": ""
         },
         "additionalOptions": {}
@@ -261,22 +232,55 @@
           "id": "j0A9W6lTtOFzjTdr",
           "name": "Reels Завод"
         }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "mode": "custom",
+              "cronExpression": "0 6 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Cron",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        560,
+        1860
+      ],
+      "id": "114dca91-061c-45af-883b-7cd2bba9ece5"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "list",
+        "useQueryString": true,
+        "queryString": "'1mwCMPgw6NjfEl4IiRIb1gkdFCM42gBXi' in parents and mimeType != 'application/vnd.google-apps.folder'",
+        "options": {}
+      },
+      "name": "Get Reels1",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 1,
+      "position": [
+        760,
+        1860
+      ],
+      "id": "fae81579-0160-45f9-9e7e-b551f7d378a1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Vt1qBhoNFddDaUnc",
+          "name": "Google Drive account"
+        }
       }
     }
   ],
   "pinData": {},
   "connections": {
-    "Get Reels": {
-      "main": [
-        [
-          {
-            "node": "Pick Random",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Pick Random": {
       "main": [
         [
@@ -415,13 +419,35 @@
           }
         ]
       ]
+    },
+    "Cron": {
+      "main": [
+        [
+          {
+            "node": "Get Reels1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Reels1": {
+      "main": [
+        [
+          {
+            "node": "Pick Random",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "20468e39-3392-4f13-9068-9c37143cc7f0",
+  "versionId": "c343a874-141f-4003-9c2d-7ce92110d64b",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
