@@ -3,37 +3,17 @@
   "nodes": [
     {
       "parameters": {
-        "triggerTimes": {
-          "item": [
-            {
-              "mode": "custom",
-              "cronExpression": "0 6 * * *"
-            }
-          ]
-        }
-      },
-      "name": "Cron1",
-      "type": "n8n-nodes-base.cron",
-      "typeVersion": 1,
-      "position": [
-        140,
-        2320
-      ],
-      "id": "d5f117da-827a-4012-9147-8fca396ba524"
-    },
-    {
-      "parameters": {
-        "fileName": "input.mp4",
+        "fileName": "/tmp/input.mp4",
         "options": {}
       },
-      "name": "Write Binary File",
+      "name": "Write Binary File1",
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        -1640,
-        7380
+        -3380,
+        9660
       ],
-      "id": "cb284808-b90d-4a06-a4ce-47299dfba179"
+      "id": "9851ba66-785f-4f2d-a733-3c58911cbc93"
     },
     {
       "parameters": {
@@ -44,40 +24,40 @@
         "bodyParametersJson": "{\n  \"model\": \"gpt-3.5-turbo\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Ты — эксперт по Instagram Reels. Напиши КЛИКБЕЙТНЫЙ заголовок и описание на русском. Ответ верни в формате JSON: {\\\"title\\\": \\\"...\\\", \\\"description\\\": \\\"...\\\"}. Без смайликов и строго по-русски.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Тема ролика: {{$json.title}}\"\n    }\n  ]\n}\n",
         "headerParametersJson": "{\n  \"Authorization\": \"Bearer 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\",\n  \"Content-Type\": \"application/json\"\n}\n"
       },
-      "name": "GPT Generate1",
+      "name": "GPT Generate",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        -720,
-        6940
+        -2460,
+        9140
       ],
-      "id": "485a5847-9117-4180-8375-8f8d332956a6"
+      "id": "30e0f55f-242d-4fd5-a2b1-8acb58c39f06"
     },
     {
       "parameters": {
         "functionCode": "const files = items; // каждый item — это файл\nif (!files.length) {\n  throw new Error('Нет файлов для выбора');\n}\n\nconst idx = Math.floor(Math.random() * files.length);\n\nreturn [\n  {\n    json: {\n      fileId: files[idx].json.id,\n      fileName: files[idx].json.name\n    }\n  }\n];\n"
       },
-      "name": "Pick Random1",
+      "name": "Pick Random",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        -1940,
-        7220
+        -3680,
+        9420
       ],
-      "id": "63bfa2c4-7a7e-4843-92b8-027bdd56a38e"
+      "id": "37144a07-66b6-4406-ad0c-c5539c675f9a"
     },
     {
       "parameters": {
-        "command": "=ffmpeg -i \"{{$node['Write Binary File'].json['path']}}\" -vf \"drawbox=...,drawtext=text='{{$node['Caption Source1'].json['title']}}' ...\""
+        "command": "=ffmpeg -i \"/tmp/input.mp4\" -vf \"drawbox=...,drawtext=text='{{$node[\\\"Caption Source\\\"].json[\\\"title\\\"]}}'\" -y \"/tmp/output.mp4\"\n"
       },
-      "name": "Add Frame1",
+      "name": "Add Frame",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        -1500,
-        7380
+        -3200,
+        9660
       ],
-      "id": "b943fac0-6969-4bb7-95af-190dfdf2fecb"
+      "id": "381e04f4-749a-483e-a2cb-459b439c3927"
     },
     {
       "parameters": {
@@ -95,14 +75,14 @@
         },
         "additionalOptions": {}
       },
-      "name": "Get Accounts1",
+      "name": "Get Accounts",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        -1360,
-        7220
+        -3100,
+        9420
       ],
-      "id": "84cb6bee-c34b-458a-9e28-89951652f41b",
+      "id": "863876c8-a945-46ae-b479-f685c4961965",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -114,14 +94,14 @@
       "parameters": {
         "functionCode": "return Math.random() < 0.5 ? [{json:{branch: 'GPT'}}] : [{json:{branch: 'Competitor'}}];"
       },
-      "name": "Choose Source1",
+      "name": "Choose Source",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        -1160,
-        7220
+        -2900,
+        9420
       ],
-      "id": "ab192315-fceb-4a51-b09d-f510221f22bf"
+      "id": "e94dbbf9-3323-4d76-b3e8-d35825d8af57"
     },
     {
       "parameters": {
@@ -134,14 +114,14 @@
           ]
         }
       },
-      "name": "IF GPT1",
+      "name": "IF GPT",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        -940,
-        7220
+        -2680,
+        9420
       ],
-      "id": "ada780ad-7755-4c19-914b-cb6dd13f120c"
+      "id": "3bc5a44b-5cd3-47f9-88fb-74550960f001"
     },
     {
       "parameters": {
@@ -149,40 +129,40 @@
         "responseFormat": "string",
         "options": {}
       },
-      "name": "Fetch Competitor Reels1",
+      "name": "Fetch Competitor Reels",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        -800,
-        7460
+        -2540,
+        9660
       ],
-      "id": "6412d16b-3b0b-4032-a99a-09c3ed526ead"
+      "id": "f76484ab-4e59-4d38-b1e0-08576b0e23de"
     },
     {
       "parameters": {
         "functionCode": "// filter for viral reel\nconst reels = items[0].json.reels || [];\nconst good = reels.filter(r => r.views / r.followers > 1.5);\nif (!good.length) { return [{json:{title:'', description:'', music:''}}]; }\nconst pick = good[Math.floor(Math.random()*good.length)];\nreturn [{json:{title: pick.title, description: pick.description, music: pick.music}}];"
       },
-      "name": "Select Viral1",
+      "name": "Select Viral",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        -640,
-        7460
+        -2380,
+        9660
       ],
-      "id": "86719b42-ad3f-4f60-9d3a-586a1e7673bf"
+      "id": "86211fc7-5f63-4a31-b233-71b183108d13"
     },
     {
       "parameters": {
         "functionCode": "const data = items[0].json;\nlet title = data.title || data.choices?.[0]?.message?.content || '';\nlet description = data.description || '';\nreturn [{ json: { title, description } }];\n"
       },
-      "name": "Caption Source1",
+      "name": "Caption Source",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        -500,
-        7220
+        -2240,
+        9420
       ],
-      "id": "97167753-171e-4d58-90f9-dff510ace9f1"
+      "id": "3e1062d1-d652-4a5e-9cd3-28fb2d1e66a6"
     },
     {
       "parameters": {
@@ -200,14 +180,14 @@
         },
         "additionalOptions": {}
       },
-      "name": "Check Duplicate1",
+      "name": "Check Duplicate",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        -260,
-        7220
+        -2000,
+        9420
       ],
-      "id": "651aec82-32f4-467c-b8df-1b12dd703554",
+      "id": "58306a37-4b51-4ab6-9f94-9df42cd64eab",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -232,14 +212,14 @@
         "addAllFields": false,
         "options": {}
       },
-      "name": "Save Record1",
+      "name": "Save Record",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        -40,
-        7220
+        -1780,
+        9420
       ],
-      "id": "fea01707-f232-4150-ad1c-62d9a0e64452",
+      "id": "d7456de3-4189-4dc5-8b4d-5258b5e5e7e1",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -251,18 +231,19 @@
       "parameters": {
         "requestMethod": "POST",
         "url": "https://api.autoposting.com/reels",
+        "allowUnauthorizedCerts": true,
         "jsonParameters": true,
         "options": {},
         "bodyParametersJson": "{\n  \"caption\": \"{{$node['Caption Source'].json['description']}}\",\n  \"file\": \"output.mp4\"\n}"
       },
-      "name": "Publish Reel1",
+      "name": "Publish Reel",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        180,
-        7220
+        -1560,
+        9420
       ],
-      "id": "ad9c49be-780d-4f57-a983-c509d3800b36"
+      "id": "ae301d1a-eb09-409f-97ea-d3db2454757d"
     },
     {
       "parameters": {
@@ -272,14 +253,14 @@
         "table": "history",
         "options": {}
       },
-      "name": "Update Status1",
+      "name": "Update Status",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        380,
-        7220
+        -1360,
+        9420
       ],
-      "id": "7ea3f73f-6195-447d-9a4f-25b2bd480869",
+      "id": "cff7f125-3322-40bb-abac-7d1cc5fb600d",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -299,14 +280,14 @@
           ]
         }
       },
-      "name": "Cron3",
+      "name": "Cron4",
       "type": "n8n-nodes-base.cron",
       "typeVersion": 1,
       "position": [
-        -2320,
-        7220
+        -4060,
+        9420
       ],
-      "id": "2b34deea-293b-428f-9c3d-d192de9f27f0"
+      "id": "bf851520-73e9-41cc-a630-d43a23f80d0f"
     },
     {
       "parameters": {
@@ -316,14 +297,14 @@
         "queryString": "'1mwCMPgw6NjfEl4IiRIb1gkdFCM42gBXi' in parents and mimeType != 'application/vnd.google-apps.folder'",
         "options": {}
       },
-      "name": "Get Reels",
+      "name": "Get Reels1",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 1,
       "position": [
-        -2120,
-        7220
+        -3860,
+        9420
       ],
-      "id": "96c71cbd-0803-4b17-9658-271718b7fd20",
+      "id": "dcfe0a9c-a7f0-4cde-a953-c1e6c6a9ee03",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -336,7 +317,7 @@
         "operation": "download",
         "fileId": {
           "__rl": true,
-          "value": "={{$node[\"Pick Random1\"].json[\"fileId\"]}}\n",
+          "value": "={{$node[\"Pick Random\"].json[\"fileId\"]}}\n",
           "mode": "id"
         },
         "options": {}
@@ -344,11 +325,11 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -1760,
-        7220
+        -3500,
+        9420
       ],
-      "id": "f659f1e4-e061-4001-81a5-ab9740c2742a",
-      "name": "Download from Drive",
+      "id": "a2af0e91-76d9-4115-b8b3-9de9f53b3a67",
+      "name": "Download from Drive1",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -358,202 +339,202 @@
     },
     {
       "parameters": {
-        "content": "# 1. n8n.io\n# 2. airtable.com\n# 3. developers.facebook.com\n# 4. platform.openai.com\n# 5. console.cloud.google.com\n.\n# ID -\n# Secret - \n# Access Token - EAAKp3yN0oqIBOxz80OfxZAoGMvztjTznRRQDfeoB51AEZCmQobWXF3ZClrnD5AydWs9dNmNjdKTx1h4Op127eAC14x5Nua6ERAawWr346D0RWjuDHO2UMdbC5Pff52sRxi9PWtMju1jQ4S4QvQqHzr3YLkICbZAZCvZAKERvuJsvW4XEGGkMJpAGsBsW0XMTgwC7gM5o3mDOwxRwZBy6uY9VLH3pR1wjCKZAuKkmez4ZC4CQx227SRwZDZD",
+        "content": "# 1. n8n.io\n# 2. airtable.com\n# 3. developers.facebook.com\n# 4. platform.openai.com\n# 5. console.cloud.google.com\n.\n# ID -\n# Secret - \n# Access Token - EAAKp3yN0oqIBO72LfFPVfRgs6N4jWuO2Ph3GxtkBuo1O4PILEhnZBdgdRX1hxZA7ZBr9c2PQmeJkb7ZCKrkZBLgRkszNLWXTMZCzW2c52UuLXit6ZBQK2vXQ99C3H4tCNSuYAGYCpL4z1VrrgVcYtmVAfhPOF47YvZCZCkOgxmMQl9a0ivOzywiMFNKXWMX3azAQeWhxBFxYqtzcbZBQZBU7VrFhf2GJkUZBEZCp99dGrFEYjINsLLLJFxwZDZD",
         "height": 960,
         "width": 640
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -280,
-        6100
+        -2020,
+        8300
       ],
       "typeVersion": 1,
-      "id": "bffd88ea-432f-40b0-8b87-a9252bb8c532",
-      "name": "Sticky Note1"
+      "id": "573c42f0-e612-4bb0-8552-1083631e2c72",
+      "name": "Sticky Note"
     }
   ],
   "pinData": {},
   "connections": {
-    "Cron1": {
-      "main": [
-        []
-      ]
-    },
-    "Write Binary File": {
+    "Write Binary File1": {
       "main": [
         [
           {
-            "node": "Get Accounts1",
+            "node": "Get Accounts",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "GPT Generate1": {
+    "GPT Generate": {
       "main": [
         [
           {
-            "node": "Caption Source1",
+            "node": "Caption Source",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Pick Random1": {
+    "Pick Random": {
       "main": [
         [
           {
-            "node": "Download from Drive",
+            "node": "Download from Drive1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Add Frame1": {
+    "Add Frame": {
       "main": [
         [
           {
-            "node": "Get Accounts1",
+            "node": "Get Accounts",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Get Accounts1": {
+    "Get Accounts": {
       "main": [
         [
           {
-            "node": "Choose Source1",
+            "node": "Choose Source",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Choose Source1": {
+    "Choose Source": {
       "main": [
         [
           {
-            "node": "IF GPT1",
+            "node": "IF GPT",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "IF GPT1": {
+    "IF GPT": {
       "main": [
         [
           {
-            "node": "GPT Generate1",
+            "node": "GPT Generate",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Fetch Competitor Reels1",
+            "node": "Fetch Competitor Reels",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Fetch Competitor Reels1": {
+    "Fetch Competitor Reels": {
       "main": [
         [
           {
-            "node": "Select Viral1",
+            "node": "Select Viral",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Select Viral1": {
+    "Select Viral": {
       "main": [
         [
           {
-            "node": "Caption Source1",
+            "node": "Caption Source",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Caption Source1": {
+    "Caption Source": {
       "main": [
         [
           {
-            "node": "Check Duplicate1",
+            "node": "Check Duplicate",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Add Frame1",
+            "node": "Add Frame",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Check Duplicate1": {
+    "Check Duplicate": {
       "main": [
         [
           {
-            "node": "Save Record1",
+            "node": "Save Record",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Save Record1": {
+    "Save Record": {
       "main": [
         [
           {
-            "node": "Publish Reel1",
+            "node": "Publish Reel",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Cron3": {
+    "Cron4": {
       "main": [
         [
           {
-            "node": "Get Reels",
+            "node": "Get Reels1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Get Reels": {
+    "Get Reels1": {
       "main": [
         [
           {
-            "node": "Pick Random1",
+            "node": "Pick Random",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Download from Drive": {
+    "Download from Drive1": {
       "main": [
         [
           {
-            "node": "Write Binary File",
+            "node": "Write Binary File1",
             "type": "main",
             "index": 0
           }
         ]
+      ]
+    },
+    "Update Status": {
+      "main": [
+        []
       ]
     }
   },
@@ -561,7 +542,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "93c8be8f-1a74-4466-b390-def861bc06af",
+  "versionId": "1d5c0fc6-6f20-432e-a673-08e1f6e57ce1",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
