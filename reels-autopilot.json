@@ -33,7 +33,7 @@
     },
     {
       "parameters": {
-        "command": "ffmpeg -i \"{{$node['Download from Drive'].binary.data.filePath}}\" -vf \"drawbox=x=0:y=0:w=iw:h=ih:color=red@0.5:t=fill,drawtext=text='{{$node['Caption Source1'].json['title']}}':fontcolor=white:x=(w-text_w)/2:y=10\" -y output.mp4\n"
+        "command": "=ffmpeg -i \"{{$node['Download from Drive'].binary.data.filePath}}\" -vf \"drawbox=x=0:y=0:w=iw:h=ih:color=red@0.5:t=fill,drawtext=text='{{$node['Caption Source1'].json['title']}}':fontcolor=white:x=(w-text_w)/2:y=10\" -y output.mp4\n"
       },
       "name": "Add Frame1",
       "type": "n8n-nodes-base.executeCommand",
@@ -441,7 +441,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "ddb57455-88ba-4eb4-83e6-1cf28ad28d87",
+  "versionId": "51524812-ae3a-4798-9ecf-674326423dd3",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
