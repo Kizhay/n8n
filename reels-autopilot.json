@@ -48,7 +48,7 @@
     },
     {
       "parameters": {
-        "command": "=ffmpeg -i \"/tmp/input.mp4\" -vf \"drawbox=...,drawtext=text='{{$node[\\\"Caption Source1\\\"].json[\\\"title\\\"]}}'\" -y \"/tmp/output.mp4\"\n"
+        "command": "=ffmpeg -i \"/tmp/input.mp4\" -vf \"drawbox=...,drawtext=text='{{$node[\\\"Caption Source1\\\"].json[\\\"title\\\"]}}'\" -y \"/tmp/output.mp4\""
       },
       "name": "Add Frame1",
       "type": "n8n-nodes-base.executeCommand",
