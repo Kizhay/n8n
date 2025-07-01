@@ -295,7 +295,7 @@
         2380
       ],
       "id": "69cdaa61-7665-41df-ba22-08b1e3393276",
-      "name": "Download file",
+      "name": "Download from Drive",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -315,7 +315,7 @@
       "main": [
         [
           {
-            "node": "Download file",
+            "node": "Download from Drive",
             "type": "main",
             "index": 0
           }
@@ -385,17 +385,35 @@
     },
     "Caption Source1": {
       "main": [
-        []
+        [
+          {
+            "node": "Check Duplicate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Check Duplicate1": {
       "main": [
-        []
+        [
+          {
+            "node": "Save Record1",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Save Record1": {
       "main": [
-        []
+        [
+          {
+            "node": "Publish Reel1",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Publish Reel1": {
@@ -425,7 +443,7 @@
         ]
       ]
     },
-    "Download file": {
+    "Download from Drive": {
       "main": [
         [
           {
@@ -441,7 +459,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "51524812-ae3a-4798-9ecf-674326423dd3",
+  "versionId": "896457d4-f698-4838-bffd-151f7e9468ac",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
