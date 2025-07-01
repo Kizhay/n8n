@@ -9,7 +9,7 @@
         "options": {},
         "bodyParametersJson": "{\n  \"model\": \"gpt-3.5-turbo\",\n  \"messages\": [{\"role\": \"system\",\"content\": \"You are a helpful assistant\"},{\"role\": \"user\",\"content\": \"Generate Instagram reel caption\"}]\n}"
       },
-      "name": "GPT Generate1",
+      "name": "GPT Generate",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
@@ -322,7 +322,7 @@
   ],
   "pinData": {},
   "connections": {
-    "GPT Generate1": {
+    "GPT Generate": {
       "main": [
         [
           {
@@ -381,7 +381,7 @@
       "main": [
         [
           {
-            "node": "GPT Generate1",
+            "node": "GPT Generate",
             "type": "main",
             "index": 0
           }
