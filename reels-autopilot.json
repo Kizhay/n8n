@@ -54,7 +54,7 @@
     },
     {
       "parameters": {
-        "command": "=ffmpeg -i \"{{$node['Download from Drive1'].binary.data.filePath}}\"\n     -vf \"drawbox=... ,drawtext=text='{{$node['Caption Source'].json['title']}}' ...\"\n"
+        "command": "=\"command\": \"=ffmpeg -i \\\"{{$node['Write Binary File'].json['path']}}\\\" -vf \\\"drawbox=... ,drawtext=text='{{$node['Caption Source'].json['title']}}' ...\\\"\"\n"
       },
       "name": "Add Frame",
       "type": "n8n-nodes-base.executeCommand",
@@ -536,7 +536,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "afa4aa60-0b0e-490b-9bd6-a9baf5168db1",
+  "versionId": "3b1c2e0c-de47-454f-b83e-1b2c12639e66",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
