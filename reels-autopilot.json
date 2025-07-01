@@ -6,14 +6,14 @@
         "fileName": "/tmp/input.mp4",
         "options": {}
       },
-      "name": "Write Binary File1",
+      "name": "Write Binary File",
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        -3380,
-        9660
+        -3060,
+        12500
       ],
-      "id": "9851ba66-785f-4f2d-a733-3c58911cbc93"
+      "id": "264e9bdd-271a-498a-8aad-12d427bf1423"
     },
     {
       "parameters": {
@@ -24,40 +24,40 @@
         "bodyParametersJson": "{\n  \"model\": \"gpt-3.5-turbo\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Ты — эксперт по Instagram Reels. Напиши КЛИКБЕЙТНЫЙ заголовок и описание на русском. Ответ верни в формате JSON: {\\\"title\\\": \\\"...\\\", \\\"description\\\": \\\"...\\\"}. Без смайликов и строго по-русски.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Тема ролика: {{$json.title}}\"\n    }\n  ]\n}\n",
         "headerParametersJson": "{\n  \"Authorization\": \"Bearer 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\",\n  \"Content-Type\": \"application/json\"\n}\n"
       },
-      "name": "GPT Generate",
+      "name": "GPT Generate1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        -2460,
-        9140
+        -2140,
+        11980
       ],
-      "id": "30e0f55f-242d-4fd5-a2b1-8acb58c39f06"
+      "id": "da4732ec-5280-41f1-813a-54318aa120ca"
     },
     {
       "parameters": {
         "functionCode": "const files = items; // каждый item — это файл\nif (!files.length) {\n  throw new Error('Нет файлов для выбора');\n}\n\nconst idx = Math.floor(Math.random() * files.length);\n\nreturn [\n  {\n    json: {\n      fileId: files[idx].json.id,\n      fileName: files[idx].json.name\n    }\n  }\n];\n"
       },
-      "name": "Pick Random",
+      "name": "Pick Random1",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        -3680,
-        9420
+        -3360,
+        12260
       ],
-      "id": "37144a07-66b6-4406-ad0c-c5539c675f9a"
+      "id": "7e0bab83-866c-4f01-8e91-a68aa9e5a5be"
     },
     {
       "parameters": {
-        "command": "=ffmpeg -i \"/tmp/input.mp4\" -vf \"drawbox=...,drawtext=text='{{$node[\\\"Caption Source\\\"].json[\\\"title\\\"]}}'\" -y \"/tmp/output.mp4\"\n"
+        "command": "=ffmpeg -i \"/tmp/input.mp4\" -vf \"drawbox=...,drawtext=text='{{$node[\\\"Caption Source1\\\"].json[\\\"title\\\"]}}'\" -y \"/tmp/output.mp4\"\n"
       },
-      "name": "Add Frame",
+      "name": "Add Frame1",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        -3200,
-        9660
+        -2880,
+        12500
       ],
-      "id": "381e04f4-749a-483e-a2cb-459b439c3927"
+      "id": "e551a3f9-7975-4a0b-b859-1af657b48f10"
     },
     {
       "parameters": {
@@ -75,14 +75,14 @@
         },
         "additionalOptions": {}
       },
-      "name": "Get Accounts",
+      "name": "Get Accounts1",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        -3100,
-        9420
+        -2780,
+        12260
       ],
-      "id": "863876c8-a945-46ae-b479-f685c4961965",
+      "id": "03e500f3-b88f-4657-b816-62380bdb2686",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -94,14 +94,14 @@
       "parameters": {
         "functionCode": "return Math.random() < 0.5 ? [{json:{branch: 'GPT'}}] : [{json:{branch: 'Competitor'}}];"
       },
-      "name": "Choose Source",
+      "name": "Choose Source1",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        -2900,
-        9420
+        -2580,
+        12260
       ],
-      "id": "e94dbbf9-3323-4d76-b3e8-d35825d8af57"
+      "id": "5068f1f1-9835-4b63-b598-7d7ac147aea6"
     },
     {
       "parameters": {
@@ -114,14 +114,14 @@
           ]
         }
       },
-      "name": "IF GPT",
+      "name": "IF GPT1",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        -2680,
-        9420
+        -2360,
+        12260
       ],
-      "id": "3bc5a44b-5cd3-47f9-88fb-74550960f001"
+      "id": "23372335-dd6f-4a3e-986d-758046c70ab6"
     },
     {
       "parameters": {
@@ -129,40 +129,27 @@
         "responseFormat": "string",
         "options": {}
       },
-      "name": "Fetch Competitor Reels",
+      "name": "Fetch Competitor Reels1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        -2540,
-        9660
+        -2220,
+        12500
       ],
-      "id": "f76484ab-4e59-4d38-b1e0-08576b0e23de"
+      "id": "22982e6c-aff0-44b3-8b1b-b9d695908937"
     },
     {
       "parameters": {
         "functionCode": "// filter for viral reel\nconst reels = items[0].json.reels || [];\nconst good = reels.filter(r => r.views / r.followers > 1.5);\nif (!good.length) { return [{json:{title:'', description:'', music:''}}]; }\nconst pick = good[Math.floor(Math.random()*good.length)];\nreturn [{json:{title: pick.title, description: pick.description, music: pick.music}}];"
       },
-      "name": "Select Viral",
+      "name": "Select Viral1",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        -2380,
-        9660
+        -2060,
+        12500
       ],
-      "id": "86211fc7-5f63-4a31-b233-71b183108d13"
-    },
-    {
-      "parameters": {
-        "functionCode": "const data = items[0].json;\nlet title = data.title || data.choices?.[0]?.message?.content || '';\nlet description = data.description || '';\nreturn [{ json: { title, description } }];\n"
-      },
-      "name": "Caption Source",
-      "type": "n8n-nodes-base.function",
-      "typeVersion": 1,
-      "position": [
-        -2240,
-        9420
-      ],
-      "id": "3e1062d1-d652-4a5e-9cd3-28fb2d1e66a6"
+      "id": "ee724e59-31cc-4c72-af96-1d5dad06c970"
     },
     {
       "parameters": {
@@ -180,14 +167,14 @@
         },
         "additionalOptions": {}
       },
-      "name": "Check Duplicate",
+      "name": "Check Duplicate1",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        -2000,
-        9420
+        -1680,
+        12260
       ],
-      "id": "58306a37-4b51-4ab6-9f94-9df42cd64eab",
+      "id": "861f7f38-9191-42b8-8e2a-16c20a4036be",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -212,14 +199,14 @@
         "addAllFields": false,
         "options": {}
       },
-      "name": "Save Record",
+      "name": "Save Record1",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        -1780,
-        9420
+        -1460,
+        12260
       ],
-      "id": "d7456de3-4189-4dc5-8b4d-5258b5e5e7e1",
+      "id": "cb1b9ade-6c4b-48f0-bc64-a81e380bdb1c",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -236,14 +223,14 @@
         "options": {},
         "bodyParametersJson": "{\n  \"caption\": \"{{$node['Caption Source'].json['description']}}\",\n  \"file\": \"output.mp4\"\n}"
       },
-      "name": "Publish Reel",
+      "name": "Publish Reel1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        -1560,
-        9420
+        -1240,
+        12260
       ],
-      "id": "ae301d1a-eb09-409f-97ea-d3db2454757d"
+      "id": "8c08cda2-1887-4a80-a11b-d42121d63624"
     },
     {
       "parameters": {
@@ -253,14 +240,14 @@
         "table": "history",
         "options": {}
       },
-      "name": "Update Status",
+      "name": "Update Status1",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        -1360,
-        9420
+        -1040,
+        12260
       ],
-      "id": "cff7f125-3322-40bb-abac-7d1cc5fb600d",
+      "id": "69f907bd-9e05-4c1a-bc24-d35ebd382d23",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -280,14 +267,14 @@
           ]
         }
       },
-      "name": "Cron4",
+      "name": "Cron",
       "type": "n8n-nodes-base.cron",
       "typeVersion": 1,
       "position": [
-        -4060,
-        9420
+        -3740,
+        12260
       ],
-      "id": "bf851520-73e9-41cc-a630-d43a23f80d0f"
+      "id": "039a7727-8e6e-4ad4-8d16-4fa550876a1e"
     },
     {
       "parameters": {
@@ -297,14 +284,14 @@
         "queryString": "'1mwCMPgw6NjfEl4IiRIb1gkdFCM42gBXi' in parents and mimeType != 'application/vnd.google-apps.folder'",
         "options": {}
       },
-      "name": "Get Reels1",
+      "name": "Get Reels",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 1,
       "position": [
-        -3860,
-        9420
+        -3540,
+        12260
       ],
-      "id": "dcfe0a9c-a7f0-4cde-a953-c1e6c6a9ee03",
+      "id": "4bcf2946-c9c6-41a6-9716-424645b711e7",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -317,7 +304,7 @@
         "operation": "download",
         "fileId": {
           "__rl": true,
-          "value": "={{$node[\"Pick Random\"].json[\"fileId\"]}}",
+          "value": "={{$node[\"Pick Random1\"].json[\"fileId\"]}}",
           "mode": "id"
         },
         "options": {}
@@ -325,11 +312,11 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -3500,
-        9420
+        -3180,
+        12260
       ],
-      "id": "a2af0e91-76d9-4115-b8b3-9de9f53b3a67",
-      "name": "Download from Drive1",
+      "id": "d5bf4d3d-93c3-42e3-9290-23498a742b3f",
+      "name": "Download from Drive",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -345,28 +332,41 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -2020,
-        8300
+        -1700,
+        11140
       ],
       "typeVersion": 1,
-      "id": "573c42f0-e612-4bb0-8552-1083631e2c72",
-      "name": "Sticky Note"
+      "id": "e5b2f217-a3fe-4f5c-9583-7bc04b02864a",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "functionCode": "const data = items[0].json;\nlet title = data.title || data.choices?.[0]?.message?.content || '';\nlet description = data.description || '';\nreturn [{ json: { title, description } }];\n"
+      },
+      "name": "Caption Source",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        -1920,
+        12260
+      ],
+      "id": "763f8f9b-56de-4670-b19c-325386df8222"
     }
   ],
   "pinData": {},
   "connections": {
-    "Write Binary File1": {
+    "Write Binary File": {
       "main": [
         [
           {
-            "node": "Get Accounts",
+            "node": "Get Accounts1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "GPT Generate": {
+    "GPT Generate1": {
       "main": [
         [
           {
@@ -377,84 +377,139 @@
         ]
       ]
     },
-    "Pick Random": {
+    "Pick Random1": {
       "main": [
         [
           {
-            "node": "Download from Drive1",
+            "node": "Download from Drive",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Add Frame": {
+    "Add Frame1": {
       "main": [
         [
           {
-            "node": "Get Accounts",
+            "node": "Get Accounts1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Get Accounts": {
+    "Get Accounts1": {
       "main": [
         [
           {
-            "node": "Publish Reel",
+            "node": "Publish Reel1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Choose Source": {
+    "Choose Source1": {
       "main": [
         [
           {
-            "node": "IF GPT",
+            "node": "IF GPT1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "IF GPT": {
+    "IF GPT1": {
       "main": [
         [
           {
-            "node": "GPT Generate",
+            "node": "GPT Generate1",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Fetch Competitor Reels",
+            "node": "Fetch Competitor Reels1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Fetch Competitor Reels": {
+    "Fetch Competitor Reels1": {
       "main": [
         [
           {
-            "node": "Select Viral",
+            "node": "Select Viral1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Select Viral": {
+    "Select Viral1": {
       "main": [
         [
           {
             "node": "Caption Source",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Duplicate1": {
+      "main": [
+        [
+          {
+            "node": "Save Record1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Record1": {
+      "main": [
+        [
+          {
+            "node": "Publish Reel1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cron": {
+      "main": [
+        [
+          {
+            "node": "Get Reels",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Reels": {
+      "main": [
+        [
+          {
+            "node": "Pick Random1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download from Drive": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
             "type": "main",
             "index": 0
           }
@@ -465,76 +520,16 @@
       "main": [
         [
           {
-            "node": "Check Duplicate",
+            "node": "Check Duplicate1",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Add Frame",
+            "node": "Add Frame1",
             "type": "main",
             "index": 0
           }
         ]
-      ]
-    },
-    "Check Duplicate": {
-      "main": [
-        [
-          {
-            "node": "Save Record",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Save Record": {
-      "main": [
-        [
-          {
-            "node": "Publish Reel",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Cron4": {
-      "main": [
-        [
-          {
-            "node": "Get Reels1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Reels1": {
-      "main": [
-        [
-          {
-            "node": "Pick Random",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Download from Drive1": {
-      "main": [
-        [
-          {
-            "node": "Write Binary File1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Update Status": {
-      "main": [
-        []
       ]
     }
   },
@@ -542,7 +537,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "1d5c0fc6-6f20-432e-a673-08e1f6e57ce1",
+  "versionId": "a847800b-23f7-4e89-a118-033e006d978e",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
