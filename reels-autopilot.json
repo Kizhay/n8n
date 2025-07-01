@@ -403,7 +403,7 @@
       "main": [
         [
           {
-            "node": "Choose Source",
+            "node": "Publish Reel",
             "type": "main",
             "index": 0
           }
