@@ -12,14 +12,14 @@
           ]
         }
       },
-      "name": "Cron4",
+      "name": "Cron",
       "type": "n8n-nodes-base.cron",
       "typeVersion": 1,
       "position": [
-        -6880,
-        -18100
+        -7360,
+        -15860
       ],
-      "id": "552b5dab-f5ec-406a-866d-51fa3de6a57d"
+      "id": "8d5973dc-4d00-4345-87b1-a3aceb1af626"
     },
     {
       "parameters": {
@@ -27,43 +27,43 @@
         "url": "https://api.openai.com/v1/chat/completions",
         "jsonParameters": true,
         "options": {},
-        "bodyParametersJson": "{\n  \"model\": \"gpt-3.5-turbo\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Ты профессиональный маркетолог и сценарист Instagram Reels. Твоя задача — создавать вирусные заголовки и лаконичные описания, которые сразу цепляют внимание и доносят суть.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Создай **заголовок** и **краткое, цепляющее описание** для Instagram Reels на тему: [УКАЖИ ТЕМУ ЗДЕСЬ].\\n\\n🔹 **Заголовок** — одно цепляющее предложение, провокационное, кликбейтное, вызывающее интерес, но без фейка. Никаких эмодзи в заголовке.\\n\\n🔹 **Описание** — пиши живым, разговорным языком. Максимум 2–3 абзаца или 300 символов. Передай суть видео, усили интерес, добавь лёгкий триггер или вопрос. Заверши простым призывом к действию (смотри, пиши, делай).\\n\\nВерни ответ строго в следующем формате:\\n\\nЗаголовок: [текст заголовка]\\nОписание: [краткое, вовлекающее описание]\"\n    }\n  ]\n}\n",
-        "headerParametersJson": "{\n  \"Authorization\": \"Bearer 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\",\n  \"Content-Type\": \"application/json\"\n}\n"
+        "bodyParametersJson": "{\n  \"model\": \"gpt-3.5-turbo\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"\u0422\u044b \u043f\u0440\u043e\u0444\u0435\u0441\u0441\u0438\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0439 \u043c\u0430\u0440\u043a\u0435\u0442\u043e\u043b\u043e\u0433 \u0438 \u0441\u0446\u0435\u043d\u0430\u0440\u0438\u0441\u0442 Instagram Reels. \u0422\u0432\u043e\u044f \u0437\u0430\u0434\u0430\u0447\u0430 \u2014 \u0441\u043e\u0437\u0434\u0430\u0432\u0430\u0442\u044c \u0432\u0438\u0440\u0443\u0441\u043d\u044b\u0435 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0438 \u0438 \u043b\u0430\u043a\u043e\u043d\u0438\u0447\u043d\u044b\u0435 \u043e\u043f\u0438\u0441\u0430\u043d\u0438\u044f, \u043a\u043e\u0442\u043e\u0440\u044b\u0435 \u0441\u0440\u0430\u0437\u0443 \u0446\u0435\u043f\u043b\u044f\u044e\u0442 \u0432\u043d\u0438\u043c\u0430\u043d\u0438\u0435 \u0438 \u0434\u043e\u043d\u043e\u0441\u044f\u0442 \u0441\u0443\u0442\u044c.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"\u0421\u043e\u0437\u0434\u0430\u0439 **\u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a** \u0438 **\u043a\u0440\u0430\u0442\u043a\u043e\u0435, \u0446\u0435\u043f\u043b\u044f\u044e\u0449\u0435\u0435 \u043e\u043f\u0438\u0441\u0430\u043d\u0438\u0435** \u0434\u043b\u044f Instagram Reels \u043d\u0430 \u0442\u0435\u043c\u0443: [\u0423\u041a\u0410\u0416\u0418 \u0422\u0415\u041c\u0423 \u0417\u0414\u0415\u0421\u042c].\\n\\n\ud83d\udd39 **\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a** \u2014 \u043e\u0434\u043d\u043e \u0446\u0435\u043f\u043b\u044f\u044e\u0449\u0435\u0435 \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0435\u043d\u0438\u0435, \u043f\u0440\u043e\u0432\u043e\u043a\u0430\u0446\u0438\u043e\u043d\u043d\u043e\u0435, \u043a\u043b\u0438\u043a\u0431\u0435\u0439\u0442\u043d\u043e\u0435, \u0432\u044b\u0437\u044b\u0432\u0430\u044e\u0449\u0435\u0435 \u0438\u043d\u0442\u0435\u0440\u0435\u0441, \u043d\u043e \u0431\u0435\u0437 \u0444\u0435\u0439\u043a\u0430. \u041d\u0438\u043a\u0430\u043a\u0438\u0445 \u044d\u043c\u043e\u0434\u0437\u0438 \u0432 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0435.\\n\\n\ud83d\udd39 **\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435** \u2014 \u043f\u0438\u0448\u0438 \u0436\u0438\u0432\u044b\u043c, \u0440\u0430\u0437\u0433\u043e\u0432\u043e\u0440\u043d\u044b\u043c \u044f\u0437\u044b\u043a\u043e\u043c. \u041c\u0430\u043a\u0441\u0438\u043c\u0443\u043c 2\u20133 \u0430\u0431\u0437\u0430\u0446\u0430 \u0438\u043b\u0438 300 \u0441\u0438\u043c\u0432\u043e\u043b\u043e\u0432. \u041f\u0435\u0440\u0435\u0434\u0430\u0439 \u0441\u0443\u0442\u044c \u0432\u0438\u0434\u0435\u043e, \u0443\u0441\u0438\u043b\u0438 \u0438\u043d\u0442\u0435\u0440\u0435\u0441, \u0434\u043e\u0431\u0430\u0432\u044c \u043b\u0451\u0433\u043a\u0438\u0439 \u0442\u0440\u0438\u0433\u0433\u0435\u0440 \u0438\u043b\u0438 \u0432\u043e\u043f\u0440\u043e\u0441. \u0417\u0430\u0432\u0435\u0440\u0448\u0438 \u043f\u0440\u043e\u0441\u0442\u044b\u043c \u043f\u0440\u0438\u0437\u044b\u0432\u043e\u043c \u043a \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044e (\u0441\u043c\u043e\u0442\u0440\u0438, \u043f\u0438\u0448\u0438, \u0434\u0435\u043b\u0430\u0439).\\n\\n\u0412\u0435\u0440\u043d\u0438 \u043e\u0442\u0432\u0435\u0442 \u0441\u0442\u0440\u043e\u0433\u043e \u0432 \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u043c \u0444\u043e\u0440\u043c\u0430\u0442\u0435:\\n\\n\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a: [\u0442\u0435\u043a\u0441\u0442 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430]\\n\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435: [\u043a\u0440\u0430\u0442\u043a\u043e\u0435, \u0432\u043e\u0432\u043b\u0435\u043a\u0430\u044e\u0449\u0435\u0435 \u043e\u043f\u0438\u0441\u0430\u043d\u0438\u0435]\"\n    }\n  ]\n}\n",
+        "headerParametersJson": "{\n  \"Authorization\": \"Bearer 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\",\n  \"Content-Type\": \"application/json\"\n}\n"
       },
-      "name": "GPT Generate2",
+      "name": "GPT Generate",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        -6680,
-        -18100
+        -7160,
+        -15860
       ],
-      "id": "ae733661-1984-412d-bdea-d2857b9c496f"
+      "id": "da30c449-6e28-45f0-8772-89578b4bf7b7"
     },
     {
       "parameters": {
-        "functionCode": "const files = items; // каждый item — это файл\nif (!files.length) {\n  throw new Error('Нет файлов для выбора');\n}\n\nconst idx = Math.floor(Math.random() * files.length);\n\nreturn [\n  {\n    json: {\n      fileId: files[idx].json.id,\n      fileName: files[idx].json.name\n    }\n  }\n];\n"
+        "functionCode": "const files = items; // \u043a\u0430\u0436\u0434\u044b\u0439 item \u2014 \u044d\u0442\u043e \u0444\u0430\u0439\u043b\nif (!files.length) {\n  throw new Error('\u041d\u0435\u0442 \u0444\u0430\u0439\u043b\u043e\u0432 \u0434\u043b\u044f \u0432\u044b\u0431\u043e\u0440\u0430');\n}\n\nconst idx = Math.floor(Math.random() * files.length);\n\nreturn [\n  {\n    json: {\n      fileId: files[idx].json.id,\n      fileName: files[idx].json.name\n    }\n  }\n];\n"
       },
-      "name": "Pick Random2",
+      "name": "Pick Random",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        -6140,
-        -18100
+        -6620,
+        -15860
       ],
-      "id": "14457556-33f5-449e-9cc3-0d1f45250823"
+      "id": "8c7e7d17-5745-4859-a7d0-87f15812798c"
     },
     {
       "parameters": {
-        "functionCode": "const content = items[0].json.choices?.[0]?.message?.content || '';\n\n// Извлекаем заголовок (однострочный, после \"Заголовок:\")\nconst titleMatch = content.match(/Заголовок:\\s*[\"“]?(.+?)[\"”]?\\n/);\n\n// Извлекаем описание (всё, что после \"Описание:\")\nconst descriptionMatch = content.match(/Описание:\\s*([\\s\\S]*)/);\n\n// Чистим результат\nconst title = titleMatch ? titleMatch[1].trim() : '';\nconst description = descriptionMatch ? descriptionMatch[1].trim() : '';\n\nreturn [\n  {\n    json: {\n      title,\n      description\n    }\n  }\n];\n"
+        "functionCode": "const content = items[0].json.choices?.[0]?.message?.content || '';\n\n// \u0418\u0437\u0432\u043b\u0435\u043a\u0430\u0435\u043c \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a (\u043e\u0434\u043d\u043e\u0441\u0442\u0440\u043e\u0447\u043d\u044b\u0439, \u043f\u043e\u0441\u043b\u0435 \"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a:\")\nconst titleMatch = content.match(/\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a:\\s*[\"\u201c]?(.+?)[\"\u201d]?\\n/);\n\n// \u0418\u0437\u0432\u043b\u0435\u043a\u0430\u0435\u043c \u043e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 (\u0432\u0441\u0451, \u0447\u0442\u043e \u043f\u043e\u0441\u043b\u0435 \"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435:\")\nconst descriptionMatch = content.match(/\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435:\\s*([\\s\\S]*)/);\n\n// \u0427\u0438\u0441\u0442\u0438\u043c \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\nconst title = titleMatch ? titleMatch[1].trim() : '';\nconst description = descriptionMatch ? descriptionMatch[1].trim() : '';\n\nreturn [\n  {\n    json: {\n      title,\n      description\n    }\n  }\n];\n"
       },
-      "name": "Caption Source2",
+      "name": "Caption Source",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        -6500,
-        -18100
+        -6980,
+        -15860
       ],
-      "id": "f04a9c91-83d7-4ae9-b28a-0d8c8c679013"
+      "id": "de2affbf-a46e-4428-b67b-e2c168867984"
     },
     {
       "parameters": {
@@ -81,18 +81,18 @@
         },
         "additionalOptions": {}
       },
-      "name": "Check Duplicate2",
+      "name": "Check Duplicate",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        -6660,
-        -17860
+        -7140,
+        -15620
       ],
-      "id": "5f32eae4-5dbe-4b68-8208-90a20916bf82",
+      "id": "9593a741-71c6-4bb6-8085-d12d927bdc5a",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
-          "name": "Reels Завод"
+          "name": "Reels \u0417\u0430\u0432\u043e\u0434"
         }
       }
     },
@@ -113,18 +113,18 @@
         "addAllFields": false,
         "options": {}
       },
-      "name": "Save Record2",
+      "name": "Save Record",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        -6420,
-        -17860
+        -6900,
+        -15620
       ],
-      "id": "b579b844-fbd0-4613-8b97-1b73a95ff539",
+      "id": "c229eba9-b4a2-4228-8368-002deb93eb49",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
-          "name": "Reels Завод"
+          "name": "Reels \u0417\u0430\u0432\u043e\u0434"
         }
       }
     },
@@ -137,14 +137,14 @@
         "options": {},
         "bodyParametersJson": "{\n  \"caption\": \"{{$node['Caption Source'].json['description']}}\",\n  \"file\": \"output.mp4\"\n}"
       },
-      "name": "Publish Reel2",
+      "name": "Publish Reel",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        -6200,
-        -17860
+        -6680,
+        -15620
       ],
-      "id": "5138f4c1-bc64-4456-bb0f-57bd53decef6"
+      "id": "5e820a15-2ef9-4507-aef0-eebe0b8a016d"
     },
     {
       "parameters": {
@@ -154,18 +154,18 @@
         "table": "history",
         "options": {}
       },
-      "name": "Update Status2",
+      "name": "Update Status",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        -6000,
-        -17860
+        -6480,
+        -15620
       ],
-      "id": "cf30db1d-e7bb-4cd2-8a39-3defe3c9f555",
+      "id": "aff39bb9-5614-43d6-a2ac-c7ca4999b68c",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
-          "name": "Reels Завод"
+          "name": "Reels \u0417\u0430\u0432\u043e\u0434"
         }
       },
       "disabled": true
@@ -178,14 +178,14 @@
         "queryString": "'1mwCMPgw6NjfEl4IiRIb1gkdFCM42gBXi' in parents and mimeType != 'application/vnd.google-apps.folder'",
         "options": {}
       },
-      "name": "Get Reels2",
+      "name": "Get Reels",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 1,
       "position": [
-        -6320,
-        -18100
+        -6800,
+        -15860
       ],
-      "id": "25ba1fcd-dc16-451a-b2a7-01a4fb506204",
+      "id": "66a65013-8b74-4e4d-abf9-2ac080065c90",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -198,7 +198,7 @@
         "operation": "download",
         "fileId": {
           "__rl": true,
-          "value": "={{$node[\"Pick Random2\"].json[\"fileId\"]}}\n",
+          "value": "={{$node[\"Pick Random\"].json[\"fileId\"]}}\n",
           "mode": "id"
         },
         "options": {}
@@ -206,11 +206,11 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -5960,
-        -18100
+        -6440,
+        -15860
       ],
-      "id": "5303c723-2714-49a2-ac85-c4deb0ed347f",
-      "name": "Download from Drive2",
+      "id": "73aec805-f8a0-48bf-8fe4-4404dcd2c472",
+      "name": "Download from Drive",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -226,12 +226,12 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -5220,
-        -18920
+        -5700,
+        -16680
       ],
       "typeVersion": 1,
-      "id": "73ee934b-f112-47cb-9e1f-03935593e0ff",
-      "name": "Sticky Note2"
+      "id": "b2693e43-beac-4b6d-a7a8-78504180b020",
+      "name": "Sticky Note"
     },
     {
       "parameters": {
@@ -240,125 +240,263 @@
         "responseFormat": "file",
         "jsonParameters": true,
         "options": {},
-        "bodyParametersJson": "{\n  \"comment\": \"Тестовое видео из n8n\",\n  \"resolution\": \"full-hd\",\n  \"draft\": true,\n  \"scenes\": [\n    {\n      \"elements\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"Привет, мир!\",\n          \"style\": \"005\",\n          \"duration\": 5\n        }\n      ]\n    }\n  ]\n}",
+        "bodyParametersJson": "{\n  \"comment\": \"\u0422\u0435\u0441\u0442\u043e\u0432\u043e\u0435 \u0432\u0438\u0434\u0435\u043e \u0438\u0437 n8n\",\n  \"resolution\": \"full-hd\",\n  \"draft\": true,\n  \"scenes\": [\n    {\n      \"elements\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"\u041f\u0440\u0438\u0432\u0435\u0442, \u043c\u0438\u0440!\",\n          \"style\": \"005\",\n          \"duration\": 5\n        }\n      ]\n    }\n  ]\n}",
         "headerParametersJson": "{\n  \"Content-Type\": \"application/json\",\n  \"x-api-key\": \"5QWRvH54aWMKmfeHGqoj0cLpukGYFbuNeKdFsTve\"\n}"
       },
-      "id": "279974c4-c31e-444a-b812-bdfc8ff9efde",
-      "name": "Create Video via json2video",
+      "id": "90153d58-27d6-4af7-af40-a7ddec42b3bd",
+      "name": "Create Video via json2video1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 2,
       "position": [
-        -6880,
-        -17860
+        -7360,
+        -15620
       ]
+    },
+    {
+      "parameters": {
+        "value": "60",
+        "unit": "seconds"
+      },
+      "name": "Wait Render",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        -6880,
+        -17700
+      ],
+      "id": "fc539dc1-6abd-46fe-be57-c6b3382e80f0"
+    },
+    {
+      "parameters": {
+        "requestMethod": "GET",
+        "url": "https://api.json2video.com/v2/movies/{{$node[\"Create Video via json2video\"].json[\"projectId\"]}}",
+        "jsonParameters": true,
+        "options": {},
+        "headerParametersJson": "{\n  \"x-api-key\": \"5QWRvH54aWMKmfeHGqoj0cLpukGYFbuNeKdFsTve\"\n}"
+      },
+      "name": "Check Render Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        -6680,
+        -17700
+      ],
+      "id": "dee177d1-69a9-4f39-af26-47579d110a16"
+    },
+    {
+      "parameters": {
+        "requestMethod": "GET",
+        "url": "={{$node[\"Check Render Status\"].json[\"videoUrl\"]}}",
+        "responseFormat": "file",
+        "jsonParameters": true,
+        "options": {}
+      },
+      "name": "Download Final Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        -6480,
+        -17700
+      ],
+      "id": "f09030cd-0929-4291-aa08-ca1ff4c2534a"
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "binaryPropertyName": "data",
+        "fileName": "output.mp4",
+        "parents": "1mwCMPgw6NjfEl4IiRIb1gkdFCM42gBXi"
+      },
+      "name": "Upload Final Video",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -6280,
+        -17700
+      ],
+      "id": "3f1c12a8-10bf-4e2c-9155-6bcf95432651",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Vt1qBhoNFddDaUnc",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "return [{json:{videoUrl:$node[\"Upload Final Video\"].json.webViewLink,description:$node[\"Caption Source2\"].json.description}}];"
+      },
+      "name": "Prepare Airtable Fields",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        -6080,
+        -17700
+      ],
+      "id": "4982569c-efd6-46bb-8b95-65d436a75a00"
     }
   ],
   "pinData": {},
   "connections": {
-    "Cron4": {
+    "Cron": {
       "main": [
         [
           {
-            "node": "GPT Generate2",
+            "node": "GPT Generate",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "GPT Generate2": {
+    "GPT Generate": {
       "main": [
         [
           {
-            "node": "Caption Source2",
+            "node": "Caption Source",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Pick Random2": {
+    "Pick Random": {
       "main": [
         [
           {
-            "node": "Download from Drive2",
+            "node": "Download from Drive",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Caption Source2": {
+    "Caption Source": {
       "main": [
         [
           {
-            "node": "Get Reels2",
+            "node": "Get Reels",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Check Duplicate2": {
+    "Check Duplicate": {
       "main": [
         [
           {
-            "node": "Save Record2",
+            "node": "Save Record",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Save Record2": {
+    "Save Record": {
       "main": [
         [
           {
-            "node": "Publish Reel2",
+            "node": "Publish Reel",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Get Reels2": {
+    "Publish Reel": {
       "main": [
         [
           {
-            "node": "Pick Random2",
+            "node": "Update Status",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Download from Drive2": {
+    "Get Reels": {
       "main": [
         [
           {
-            "node": "Create Video via json2video",
+            "node": "Pick Random",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Create Video via json2video": {
+    "Download from Drive": {
+      "main": [
+        [
+          {
+            "node": "Create Video via json2video1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Video via json2video1": {
+      "main": [
+        [
+          {
+            "node": "Wait Render",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait Render": {
+      "main": [
+        [
+          {
+            "node": "Check Render Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Render Status": {
+      "main": [
+        [
+          {
+            "node": "Download Final Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Final Video": {
+      "main": [
+        [
+          {
+            "node": "Upload Final Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Final Video": {
+      "main": [
+        [
+          {
+            "node": "Prepare Airtable Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Airtable Fields": {
       "main": [
         [
           {
             "node": "Check Duplicate2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Publish Reel2": {
-      "main": [
-        [
-          {
-            "node": "Update Status2",
             "type": "main",
             "index": 0
           }
@@ -370,7 +508,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "5a0cc1ed-0ebe-472c-b532-bb270f60f282",
+  "versionId": "b9cd2676-0653-4d7f-a7a8-bc1587d4295c",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
