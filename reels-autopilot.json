@@ -181,38 +181,6 @@
     },
     {
       "parameters": {
-        "url": "https://api.json2video.com/v2/movies/{{$node[\"Create Video via json2video1\"].json[\"project\"]}}",
-        "jsonParameters": true,
-        "options": {},
-        "headerParametersJson": "{\n  \"x-api-key\": \"5QWRvH54aWMKmfeHGqoj0cLpukGYFbuNeKdFsTve\"\n}"
-      },
-      "name": "Check Render Status1",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 1,
-      "position": [
-        1100,
-        200
-      ],
-      "id": "ef9b8210-0e6c-4381-b67a-61b9fd83d928"
-    },
-    {
-      "parameters": {
-        "url": "={{$node[\"Check Render Status1\"].json[\"videoUrl\"]}}",
-        "responseFormat": "file",
-        "jsonParameters": true,
-        "options": {}
-      },
-      "name": "Download Final Video1",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 1,
-      "position": [
-        1280,
-        200
-      ],
-      "id": "c9ef4223-85d2-499c-855e-482aee703da1"
-    },
-    {
-      "parameters": {
         "requestMethod": "POST",
         "url": "https://api.openai.com/v1/chat/completions",
         "jsonParameters": true,
@@ -401,6 +369,38 @@
         200
       ],
       "id": "8c38b552-5a8c-4c17-87c4-dc5024f76b02"
+    },
+    {
+      "parameters": {
+        "url": "https://api.json2video.com/v2/movies/{{$node[\"Create Video via json2video1\"].json[\"project\"]}}",
+        "jsonParameters": true,
+        "options": {},
+        "headerParametersJson": "{\n  \"x-api-key\": \"5QWRvH54aWMKmfeHGqoj0cLpukGYFbuNeKdFsTve\"\n}"
+      },
+      "name": "Check Render Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        200
+      ],
+      "id": "ef9b8210-0e6c-4381-b67a-61b9fd83d928"
+    },
+    {
+      "parameters": {
+        "url": "={{$node[\"Check Render Status\"].json[\"videoUrl\"]}}",
+        "responseFormat": "file",
+        "jsonParameters": true,
+        "options": {}
+      },
+      "name": "Download Final Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        200
+      ],
+      "id": "c9ef4223-85d2-499c-855e-482aee703da1"
     }
   ],
   "pinData": {
@@ -459,29 +459,7 @@
       "main": [
         [
           {
-            "node": "Check Render Status1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Check Render Status1": {
-      "main": [
-        [
-          {
-            "node": "Download Final Video1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Download Final Video1": {
-      "main": [
-        [
-          {
-            "node": "Upload Final Video",
+            "node": "Check Render Status",
             "type": "main",
             "index": 0
           }
@@ -596,13 +574,35 @@
       "main": [
         []
       ]
+    },
+    "Check Render Status": {
+      "main": [
+        [
+          {
+            "node": "Download Final Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Final Video": {
+      "main": [
+        [
+          {
+            "node": "Upload Final Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "b5572258-0033-491f-b81a-a98c60c36504",
+  "versionId": "d2c673f3-19b5-4463-a7a0-8bbee5ea3d85",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
