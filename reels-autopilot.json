@@ -1,23 +1,6 @@
 {
-  "name": "My workflow 6",
+  "name": "My workflow 6 copy",
   "nodes": [
-    {
-      "parameters": {
-        "url": "https://api.json2video.com/render",
-        "responseFormat": "file",
-        "jsonParameters": true,
-        "options": {},
-        "headerParametersJson": "{\n  \"Content-Type\": \"application/json\",\n  \"Authorization\": \"Bearer {{ $env.JSON2VIDEO_API_KEY }}\"\n}"
-      },
-      "id": "1672caaa-5a8f-4c9d-b1a3-b57e0a407844",
-      "name": "Create Video via json2video",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 2,
-      "position": [
-        -5700,
-        57700
-      ]
-    },
     {
       "parameters": {
         "triggerTimes": {
@@ -29,104 +12,58 @@
           ]
         }
       },
-      "name": "Cron5",
+      "name": "Cron4",
       "type": "n8n-nodes-base.cron",
       "typeVersion": 1,
       "position": [
-        -7540,
-        57380
+        -6880,
+        -18100
       ],
-      "id": "e5f7d277-0518-4aa9-aa56-a65af36a2649"
+      "id": "552b5dab-f5ec-406a-866d-51fa3de6a57d"
     },
     {
       "parameters": {
+        "requestMethod": "POST",
         "url": "https://api.openai.com/v1/chat/completions",
         "jsonParameters": true,
         "options": {},
-        "headerParametersJson": "{\n  \"Authorization\": \"Bearer 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\",\n  \"Content-Type\": \"application/json\"\n}\n"
+        "bodyParametersJson": "{\n  \"model\": \"gpt-3.5-turbo\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Ты профессиональный маркетолог и сценарист Instagram Reels. Твоя задача — создавать вирусные заголовки и лаконичные описания, которые сразу цепляют внимание и доносят суть.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Создай **заголовок** и **краткое, цепляющее описание** для Instagram Reels на тему: [УКАЖИ ТЕМУ ЗДЕСЬ].\\n\\n🔹 **Заголовок** — одно цепляющее предложение, провокационное, кликбейтное, вызывающее интерес, но без фейка. Никаких эмодзи в заголовке.\\n\\n🔹 **Описание** — пиши живым, разговорным языком. Максимум 2–3 абзаца или 300 символов. Передай суть видео, усили интерес, добавь лёгкий триггер или вопрос. Заверши простым призывом к действию (смотри, пиши, делай).\\n\\nВерни ответ строго в следующем формате:\\n\\nЗаголовок: [текст заголовка]\\nОписание: [краткое, вовлекающее описание]\"\n    }\n  ]\n}\n",
+        "headerParametersJson": "{\n  \"Authorization\": \"Bearer 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\",\n  \"Content-Type\": \"application/json\"\n}\n"
       },
-      "name": "GPT Generate3",
+      "name": "GPT Generate2",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        -6860,
-        57140
+        -6680,
+        -18100
       ],
-      "id": "4c5cb3b1-a9c9-44c7-902d-58834eabb0dc"
+      "id": "ae733661-1984-412d-bdea-d2857b9c496f"
     },
     {
       "parameters": {
         "functionCode": "const files = items; // каждый item — это файл\nif (!files.length) {\n  throw new Error('Нет файлов для выбора');\n}\n\nconst idx = Math.floor(Math.random() * files.length);\n\nreturn [\n  {\n    json: {\n      fileId: files[idx].json.id,\n      fileName: files[idx].json.name\n    }\n  }\n];\n"
       },
-      "name": "Pick Random3",
+      "name": "Pick Random2",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        -6220,
-        57400
+        -6140,
+        -18100
       ],
-      "id": "e57cbf32-2e04-42dc-83f4-4b11a996516e"
+      "id": "14457556-33f5-449e-9cc3-0d1f45250823"
     },
     {
       "parameters": {
-        "conditions": {
-          "string": [
-            {
-              "value1": "={{$json[\"branch\"]}}",
-              "value2": "GPT"
-            }
-          ]
-        }
+        "functionCode": "const content = items[0].json.choices?.[0]?.message?.content || '';\n\n// Извлекаем заголовок (однострочный, после \"Заголовок:\")\nconst titleMatch = content.match(/Заголовок:\\s*[\"“]?(.+?)[\"”]?\\n/);\n\n// Извлекаем описание (всё, что после \"Описание:\")\nconst descriptionMatch = content.match(/Описание:\\s*([\\s\\S]*)/);\n\n// Чистим результат\nconst title = titleMatch ? titleMatch[1].trim() : '';\nconst description = descriptionMatch ? descriptionMatch[1].trim() : '';\n\nreturn [\n  {\n    json: {\n      title,\n      description\n    }\n  }\n];\n"
       },
-      "name": "IF GPT3",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [
-        -7220,
-        57380
-      ],
-      "id": "c2da473a-ae31-4e86-ba61-052416b21a0b"
-    },
-    {
-      "parameters": {
-        "url": "=https://www.instagram.com/{{$json.account}}/reels/",
-        "responseFormat": "string",
-        "options": {}
-      },
-      "name": "Fetch Competitor Reels3",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 1,
-      "position": [
-        -6980,
-        57640
-      ],
-      "id": "8e9ad2d4-61eb-4c91-bc7a-d744a050e960"
-    },
-    {
-      "parameters": {
-        "functionCode": "// filter for viral reel\nconst reels = items[0].json.reels || [];\nconst good = reels.filter(r => r.views / r.followers > 1.5);\nif (!good.length) { return [{json:{title:'', description:'', music:''}}]; }\nconst pick = good[Math.floor(Math.random()*good.length)];\nreturn [{json:{title: pick.title, description: pick.description, music: pick.music}}];"
-      },
-      "name": "Select Viral3",
+      "name": "Caption Source2",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        -6800,
-        57640
+        -6500,
+        -18100
       ],
-      "id": "bae00be7-0698-450c-8cfa-b93ba81ea759"
-    },
-    {
-      "parameters": {
-        "functionCode": "const data = items[0].json;\nlet title = data.title || data.choices?.[0]?.message?.content || '';\nlet description = data.description || '';\nreturn [{ json: { title, description } }];\n"
-      },
-      "name": "Caption Source3",
-      "type": "n8n-nodes-base.function",
-      "typeVersion": 1,
-      "position": [
-        -6580,
-        57320
-      ],
-      "id": "e23be556-a509-4e4e-ab9c-9fa033ee7877"
+      "id": "f04a9c91-83d7-4ae9-b28a-0d8c8c679013"
     },
     {
       "parameters": {
@@ -144,14 +81,14 @@
         },
         "additionalOptions": {}
       },
-      "name": "Check Duplicate3",
+      "name": "Check Duplicate2",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        -5280,
-        57700
+        -6660,
+        -17860
       ],
-      "id": "208f5b72-e25b-4fc0-a0bc-f07306c0f722",
+      "id": "5f32eae4-5dbe-4b68-8208-90a20916bf82",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -176,14 +113,14 @@
         "addAllFields": false,
         "options": {}
       },
-      "name": "Save Record3",
+      "name": "Save Record2",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        -5060,
-        57700
+        -6420,
+        -17860
       ],
-      "id": "114c7289-146d-4c87-926f-6628989da464",
+      "id": "b579b844-fbd0-4613-8b97-1b73a95ff539",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -200,14 +137,14 @@
         "options": {},
         "bodyParametersJson": "{\n  \"caption\": \"{{$node['Caption Source'].json['description']}}\",\n  \"file\": \"output.mp4\"\n}"
       },
-      "name": "Publish Reel3",
+      "name": "Publish Reel2",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        -4840,
-        57700
+        -6200,
+        -17860
       ],
-      "id": "5e3b70a9-3920-49f6-8ab1-9e3d9820f3c7"
+      "id": "5138f4c1-bc64-4456-bb0f-57bd53decef6"
     },
     {
       "parameters": {
@@ -217,14 +154,14 @@
         "table": "history",
         "options": {}
       },
-      "name": "Update Status3",
+      "name": "Update Status2",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        -4640,
-        57700
+        -6000,
+        -17860
       ],
-      "id": "673887f1-38d8-4124-aa0f-c2ea5776d3c3",
+      "id": "cf30db1d-e7bb-4cd2-8a39-3defe3c9f555",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -241,14 +178,14 @@
         "queryString": "'1mwCMPgw6NjfEl4IiRIb1gkdFCM42gBXi' in parents and mimeType != 'application/vnd.google-apps.folder'",
         "options": {}
       },
-      "name": "Get Reels3",
+      "name": "Get Reels2",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 1,
       "position": [
-        -6400,
-        57400
+        -6320,
+        -18100
       ],
-      "id": "8af38dfb-9a27-4712-9cef-08158b2a6c3c",
+      "id": "25ba1fcd-dc16-451a-b2a7-01a4fb506204",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -261,7 +198,7 @@
         "operation": "download",
         "fileId": {
           "__rl": true,
-          "value": "={{$node[\"Pick Random3\"].json[\"fileId\"]}}\n",
+          "value": "={{$node[\"Pick Random2\"].json[\"fileId\"]}}\n",
           "mode": "id"
         },
         "options": {}
@@ -269,11 +206,11 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -6040,
-        57400
+        -5960,
+        -18100
       ],
-      "id": "2eb60083-35be-4cf0-9fdb-b3977ad27927",
-      "name": "Download from Drive3",
+      "id": "5303c723-2714-49a2-ac85-c4deb0ed347f",
+      "name": "Download from Drive2",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -289,149 +226,139 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -5300,
-        56580
+        -5220,
+        -18920
       ],
       "typeVersion": 1,
-      "id": "a842e5e9-728a-480e-a0e6-45220e5ecbaa",
-      "name": "Sticky Note3"
+      "id": "73ee934b-f112-47cb-9e1f-03935593e0ff",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "https://api.json2video.com/v2/movies",
+        "responseFormat": "file",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "{\n  \"comment\": \"Тестовое видео из n8n\",\n  \"resolution\": \"full-hd\",\n  \"draft\": true,\n  \"scenes\": [\n    {\n      \"elements\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"Привет, мир!\",\n          \"style\": \"005\",\n          \"duration\": 5\n        }\n      ]\n    }\n  ]\n}",
+        "headerParametersJson": "{\n  \"Content-Type\": \"application/json\",\n  \"x-api-key\": \"5QWRvH54aWMKmfeHGqoj0cLpukGYFbuNeKdFsTve\"\n}"
+      },
+      "id": "279974c4-c31e-444a-b812-bdfc8ff9efde",
+      "name": "Create Video via json2video",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 2,
+      "position": [
+        -6880,
+        -17860
+      ]
     }
   ],
   "pinData": {},
   "connections": {
-    "Create Video via json2video": {
+    "Cron4": {
       "main": [
         [
           {
-            "node": "Check Duplicate3",
+            "node": "GPT Generate2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Cron5": {
+    "GPT Generate2": {
       "main": [
         [
           {
-            "node": "IF GPT3",
+            "node": "Caption Source2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "GPT Generate3": {
+    "Pick Random2": {
       "main": [
         [
           {
-            "node": "Caption Source3",
+            "node": "Download from Drive2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Pick Random3": {
+    "Caption Source2": {
       "main": [
         [
           {
-            "node": "Download from Drive3",
+            "node": "Get Reels2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "IF GPT3": {
+    "Check Duplicate2": {
       "main": [
         [
           {
-            "node": "GPT Generate3",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Fetch Competitor Reels3",
+            "node": "Save Record2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Fetch Competitor Reels3": {
+    "Save Record2": {
       "main": [
         [
           {
-            "node": "Select Viral3",
+            "node": "Publish Reel2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Select Viral3": {
+    "Get Reels2": {
       "main": [
         [
           {
-            "node": "Caption Source3",
+            "node": "Pick Random2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Caption Source3": {
-      "main": [
-        [
-          {
-            "node": "Get Reels3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Check Duplicate3": {
-      "main": [
-        [
-          {
-            "node": "Save Record3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Save Record3": {
-      "main": [
-        [
-          {
-            "node": "Publish Reel3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Reels3": {
-      "main": [
-        [
-          {
-            "node": "Pick Random3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Download from Drive3": {
+    "Download from Drive2": {
       "main": [
         [
           {
             "node": "Create Video via json2video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Video via json2video": {
+      "main": [
+        [
+          {
+            "node": "Check Duplicate2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Publish Reel2": {
+      "main": [
+        [
+          {
+            "node": "Update Status2",
             "type": "main",
             "index": 0
           }
@@ -443,11 +370,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "4fbd75f0-daab-4c9f-8151-b966346f8030",
+  "versionId": "5a0cc1ed-0ebe-472c-b532-bb270f60f282",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
   },
-  "id": "z0jH8wDyhCZwTN2f",
+  "id": "NnoYOzymkfuqYt8O",
   "tags": []
 }
