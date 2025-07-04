@@ -20,10 +20,10 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        1480,
-        200
+        -500,
+        -300
       ],
-      "id": "72444077-01ed-4972-b1cf-f5a8937bb338",
+      "id": "5302d577-f236-4014-90ba-f01eead84d01",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -39,10 +39,10 @@
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        1680,
-        200
+        -300,
+        -300
       ],
-      "id": "c0d4a211-0345-4491-bfcb-4814f1798c1b"
+      "id": "83f08040-44ab-4b07-97b9-14fa367a47dc"
     },
     {
       "parameters": {
@@ -64,10 +64,10 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        -120,
-        840
+        -2180,
+        340
       ],
-      "id": "5073dc73-5751-426a-9ce2-d0e277a1c1d0",
+      "id": "da6c57ad-fb80-4aee-a997-e29d420a51db",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -96,10 +96,10 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        120,
-        840
+        -1940,
+        340
       ],
-      "id": "9e2101df-ea7c-419e-bdb0-fa4a7a9f1c88",
+      "id": "28e549ec-9b76-4bf2-bf99-db52ffe28d27",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -120,10 +120,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        320,
-        840
+        -1740,
+        340
       ],
-      "id": "8c5e66a2-4805-4a70-a145-b6e372da8506"
+      "id": "0e479ea6-aa98-4d9a-a3ab-bd88caa658d5"
     },
     {
       "parameters": {
@@ -137,10 +137,10 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 1,
       "position": [
-        540,
-        840
+        -1520,
+        340
       ],
-      "id": "19b00a34-3d6d-4f2d-86a2-f91a3ecd8323",
+      "id": "d6e6ff6a-57ce-4fc3-be98-5ce440db3ec7",
       "credentials": {
         "airtableTokenApi": {
           "id": "j0A9W6lTtOFzjTdr",
@@ -157,11 +157,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        540,
-        -700
+        -1520,
+        -1200
       ],
       "typeVersion": 1,
-      "id": "b2e08593-3856-40bd-8491-625069e871e8",
+      "id": "c1e9b6f1-2c5b-40bd-a537-7193a87b5199",
       "name": "Sticky Note1"
     },
     {
@@ -173,10 +173,10 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1,
       "position": [
-        940,
-        200
+        -1160,
+        -300
       ],
-      "id": "e1efa452-55f5-41cb-9dc5-6b2fc4df8514",
+      "id": "8a90f6a5-1560-4cc2-8d4f-65a6de12f3a8",
       "webhookId": "25b2968f-29b8-47d4-8e3a-cb9a4c1a63de"
     },
     {
@@ -186,16 +186,16 @@
         "jsonParameters": true,
         "options": {},
         "bodyParametersJson": "{\n  \"model\": \"gpt-3.5-turbo\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Ты профессиональный маркетолог и сценарист Instagram Reels. Твоя задача — создавать вирусные заголовки и лаконичные описания, которые сразу цепляют внимание и доносят суть.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Создай **заголовок** и **краткое, цепляющее описание** для Instagram Reels на тему: [УКАЖИ ТЕМУ ЗДЕСЬ].\\n\\n🔹 **Заголовок** — одно цепляющее предложение, провокационное, кликбейтное, вызывающее интерес, но без фейка. Никаких эмодзи в заголовке.\\n\\n🔹 **Описание** — пиши живым, разговорным языком. Максимум 2–3 абзаца или 300 символов. Передай суть видео, усили интерес, добавь лёгкий триггер или вопрос. Заверши простым призывом к действию (смотри, пиши, делай).\\n\\nВерни ответ строго в следующем формате:\\n\\nЗаголовок: [текст заголовка]\\nОписание: [краткое, вовлекающее описание]\"\n    }\n  ]\n}\n",
-        "headerParametersJson": "{\n  \"Authorization\": \"Bearer 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\",\n  \"Content-Type\": \"application/json\"\n}\n"
+        "headerParametersJson": "{\n  \"Authorization\": \"Bearer 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\",\n  \"Content-Type\": \"application/json\"\n}\n"
       },
       "name": "GPT Generate",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        -260,
-        360
+        -2320,
+        -40
       ],
-      "id": "deda5a62-722f-4b06-8786-fcb3472449ef"
+      "id": "226b1d09-57ed-4d51-b7b6-cef140d58ec5"
     },
     {
       "parameters": {
@@ -215,10 +215,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        540,
-        360
+        -1520,
+        -40
       ],
-      "id": "fe6f521b-c71c-4b03-8713-2037618420da",
+      "id": "71773139-35dc-47f9-8c2b-c7b500d650ec",
       "name": "Edit Fields Video"
     },
     {
@@ -239,10 +239,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        140,
-        200
+        -1920,
+        -300
       ],
-      "id": "2479bcc5-f52e-4571-bcd8-9ad348368978",
+      "id": "3c7e8dd9-3194-4ac8-b5d0-e2c98c508955",
       "name": "Edit Fields Audio"
     },
     {
@@ -253,16 +253,16 @@
         "options": {
           "bodyContentType": "json"
         },
-        "bodyParametersJson": "={{\nJSON.stringify({\n  resolution: \"custom\",\n  width: 1080,\n  height: 1920,\n  draft: true,\n  scenes: [\n    {\n      elements: [\n        {\n          type: \"video\",\n          src: `https://drive.google.com/uc?export=download&id=${$node['Pick Random2'].json['fileId']}`,\n          width: 1080,\n          height: 1200,\n          top: 360,\n          left: 0,\n          resize: \"cover\"\n        },\n        {\n          type: \"html\",\n          html: `<div style=\"width:100%;height:360px;background-color:black;display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:bold;color:white;text-align:center;padding:0 40px;\">${$node['Caption Source'].json['title']}</div>`,\n          duration: 10\n        },\n        {\n          type: \"html\",\n          html: `<div style=\"width:100%;height:360px;background-color:black;\"></div>`,\n          position: \"absolute\",\n          bottom: 0,\n          left: 0,\n          duration: 10\n        }\n      ]\n    }\n  ]\n})\n}}\n",
+        "bodyParametersJson": "={{\nJSON.stringify({\n  resolution: \"custom\",\n  width: 1080,\n  height: 1920,\n  draft: true,\n  scenes: [\n    {\n      duration: 10,\n      elements: [\n        {\n          type: \"video\",\n          src: \"https://drive.google.com/uc?export=download&id=\" + $node[\"Pick Random2\"].json[\"fileId\"],\n          width: 1080,\n          height: 1200,\n          top: 360,\n          left: 0,\n          resize: \"cover\",\n          position: \"absolute\",\n          duration: 10,\n          \"z-index\": 1\n        },\n        {\n          type: \"html\",\n          html:\n            \"<div style='width:100%;height:240px;background:black;display:flex;align-items:center;justify-content:center;padding:0 40px;'>\" +\n            \"<span style='font-size:38px;font-weight:bold;color:white;text-align:center;'>\" +\n            $node[\"Caption Source\"].json[\"title\"] +\n            \"</span></div>\",\n          position: \"absolute\",\n          top: 0,\n          left: 0,\n          width: 1080,\n          height: 240,\n          duration: 10,\n          \"z-index\": 10\n        },\n        {\n          type: \"html\",\n          html: \"<div style='width:100%;height:240px;background:black;'></div>\",\n          position: \"absolute\",\n          bottom: 0,\n          left: 0,\n          width: 1080,\n          height: 240,\n          duration: 10,\n          \"z-index\": 5\n        },\n        {\n          type: \"audio\",\n          src: \"https://drive.google.com/uc?export=download&id=\" + $node[\"Pick Random1\"].json[\"fileId\"],\n          duration: 10\n        }\n      ]\n    }\n  ]\n})\n}}\n",
         "headerParametersJson": "{\n  \"Content-Type\": \"application/json\",\n  \"x-api-key\": \"5QWRvH54aWMKmfeHGqoj0cLpukGYFbuNeKdFsTve\"\n}"
       },
-      "id": "c7eda61d-09f8-484d-a5e7-6284ac4dd5fc",
+      "id": "b84af421-d663-470d-8de7-f8523c412c8d",
       "name": "Create Video via json2video",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 2,
       "position": [
-        700,
-        200
+        -1360,
+        -300
       ]
     },
     {
@@ -280,10 +280,10 @@
       "type": "n8n-nodes-base.cron",
       "typeVersion": 1,
       "position": [
-        -480,
-        260
+        -2540,
+        -240
       ],
-      "id": "270721b2-05a2-4ec8-8b6e-d78494e94d2d"
+      "id": "9b22aa50-8c32-4d81-8ea6-93ea1c7997cd"
     },
     {
       "parameters": {
@@ -293,10 +293,10 @@
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        -60,
-        360
+        -2120,
+        -40
       ],
-      "id": "6efff2c8-9050-445d-bc63-ae7b338e686d"
+      "id": "02a8176b-a666-40ab-a919-c9160692ebfe"
     },
     {
       "parameters": {
@@ -310,10 +310,10 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 1,
       "position": [
-        -260,
-        200
+        -2320,
+        -300
       ],
-      "id": "e31ef7ed-fff3-49c8-b09d-81e33d50d3fa",
+      "id": "a6242a3a-026a-460e-8a20-3eb1aef1e77d",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -333,10 +333,10 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 1,
       "position": [
-        140,
-        360
+        -1920,
+        -40
       ],
-      "id": "a6b6006a-7397-443e-bffc-d956e51e2fd5",
+      "id": "19f1afe4-3a29-4ca2-8a04-9a8116f5927a",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "Vt1qBhoNFddDaUnc",
@@ -352,10 +352,10 @@
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        340,
-        360
+        -1720,
+        -40
       ],
-      "id": "08d3989a-d7ed-4d03-9e6c-9694df3ba315"
+      "id": "ccaeb9da-137a-431d-8190-a7ee1a100aba"
     },
     {
       "parameters": {
@@ -365,26 +365,26 @@
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        -60,
-        200
+        -2120,
+        -300
       ],
-      "id": "8c38b552-5a8c-4c17-87c4-dc5024f76b02"
+      "id": "82dea402-f387-4539-977a-0f93ef219295"
     },
     {
       "parameters": {
         "url": "https://api.json2video.com/v2/movies/{{$node[\"Create Video via json2video1\"].json[\"project\"]}}",
         "jsonParameters": true,
         "options": {},
-        "headerParametersJson": "{\n  \"x-api-key\": \"5QWRvH54aWMKmfeHGqoj0cLpukGYFbuNeKdFsTve\"\n}"
+        "headerParametersJson": "{\n  \"Authorization\": \"Bearer {{$env.JSON2VIDEO_API_KEY}}\"\n}"
       },
       "name": "Check Render Status",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        1100,
-        200
+        -1000,
+        -300
       ],
-      "id": "ef9b8210-0e6c-4381-b67a-61b9fd83d928"
+      "id": "9d2cd14d-ca1b-40a8-a752-867e424f4405"
     },
     {
       "parameters": {
@@ -397,10 +397,30 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        1280,
-        200
+        -660,
+        -360
       ],
-      "id": "c9ef4223-85d2-499c-855e-482aee703da1"
+      "id": "73581849-b01f-4207-9c3c-efc6970f9928"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$node[\"Check Render Status\"].json[\"videoUrl\"]}}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "name": "If Video Ready",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -840,
+        -300
+      ],
+      "id": "3a075561-ee70-4e4a-b5cb-17d9a7962a87"
     }
   ],
   "pinData": {
@@ -570,16 +590,11 @@
         ]
       ]
     },
-    "Edit Fields Audio": {
-      "main": [
-        []
-      ]
-    },
     "Check Render Status": {
       "main": [
         [
           {
-            "node": "Download Final Video",
+            "node": "If Video Ready",
             "type": "main",
             "index": 0
           }
@@ -596,13 +611,42 @@
           }
         ]
       ]
+    },
+    "If Video Ready": {
+      "main": [
+        [
+          {
+            "node": "Download Final Video",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait Render1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Audio": {
+      "main": [
+        [
+          {
+            "node": "GPT Generate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "d2c673f3-19b5-4463-a7a0-8bbee5ea3d85",
+  "versionId": "cbc7fb30-065b-46c5-b989-8eff656e6d6e",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "03802800ec9728491c300edb92e0138d87d9dcbbfccb74620634ca050fae6138"
